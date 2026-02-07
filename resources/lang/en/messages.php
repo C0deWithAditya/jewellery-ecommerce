@@ -1538,4 +1538,13 @@
   'Credential Setup' => 'Credential Setup',
   'Apple Login' => 'Apple Login',
   'All Rights Reserved' => 'All Rights Reserved',
+  'Get Started' => 'Get Started',
+  'Are you ready to start installation process' => 'Are you ready to start installation process',
+  'Database Host Name' => 'Database Host Name',
+  'Database Username' => 'Database Username',
+  'Database Password' => 'Database Password',
+  'Database Name' => 'Database Name',
+  'Where to get this information' => 'Where to get this information',
+  'Proceed Next' => 'Proceed Next',
+  'RequiredDatabase Information' => 'RequiredDatabase Information',
 );

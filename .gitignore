@@ -1,57 +1,16 @@
-# Root gitignore for Jewelry E-commerce Project
-
-# OS Files
-.DS_Store
-Thumbs.db
-
-# IDE
-.idea/
-.vscode/
-*.iml
-
-# Environment files
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 .env
-.env.local
-.env.*.local
-
-# Laravel (Admin)
-Admin/vendor/
-Admin/node_modules/
-Admin/storage/*.key
-Admin/.env
-Admin/public/storage
-Admin/public/hot
-Admin/demo/
-
-# Flutter (User app and web)
-User app and web/.dart_tool/
-User app and web/.flutter-plugins
-User app and web/.flutter-plugins-dependencies
-User app and web/build/
-User app and web/.pub-cache/
-User app and web/.pub/
-User app and web/.packages
-User app and web/ios/Pods/
-User app and web/ios/.symlinks/
-User app and web/android/.gradle/
-User app and web/android/local.properties
-
-# Delivery man app
-Delivery man app/.dart_tool/
-Delivery man app/.flutter-plugins
-Delivery man app/.flutter-plugins-dependencies
-Delivery man app/build/
-Delivery man app/.pub-cache/
-Delivery man app/.pub/
-Delivery man app/.packages
-Delivery man app/ios/Pods/
-Delivery man app/ios/.symlinks/
-Delivery man app/android/.gradle/
-Delivery man app/android/local.properties
-
-# Logs
-*.log
-npm-debug.log*
-
-# Build artifacts
-*.cache
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/Modules/Gateways
+/storage/install.zip
+/storage/update.zip
+/demo
