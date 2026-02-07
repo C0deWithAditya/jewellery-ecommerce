@@ -1547,4 +1547,7 @@
   'Where to get this information' => 'Where to get this information',
   'Proceed Next' => 'Proceed Next',
   'RequiredDatabase Information' => 'RequiredDatabase Information',
+  'Before starting the installation process please collect this
+                information. Without this information, you won’t be able to complete the installation process' => 'Before starting the installation process please collect this
+                information. Without this information  you won’t be able to complete the installation process',
 );
