@@ -1,0 +1,3 @@
+enum SearchShortBy {
+  newArrivals, offerProducts,
+}
