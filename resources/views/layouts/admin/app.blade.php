@@ -295,7 +295,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        replaceEmailsAndPhoneNumbersWithAsterisks(document.getElementById('demo'));
+        let demoElement = document.getElementById('demo');
+        if (demoElement) {
+            replaceEmailsAndPhoneNumbersWithAsterisks(demoElement);
+        }
 
         // Disable mailto links
         document.querySelectorAll('a[href^="mailto:"]').forEach(function(link) {
@@ -312,7 +315,7 @@
     });
 
     function replaceEmailsAndPhoneNumbersWithAsterisks(element) {
-        if (element.nodeType === 3) {
+        if (element && element.nodeType === 3) {
             element.nodeValue = element.nodeValue
                 .replace(/\b([A-Za-z0-9._%+-])[^@]*@([A-Za-z0-9.-]+)\.([A-Z|a-z]{2,})\b/g, function (match, firstLetter, domain, tld) {
                     var remainingAsterisks = '*'.repeat(Math.min(10, match.length - 1));
@@ -327,7 +330,7 @@
                         return match;
                     }
                 });
-        } else if (element.nodeType === 1) {
+        } else if (element && element.nodeType === 1) {
             for (var i = 0; i < element.childNodes.length; i++) {
                 replaceEmailsAndPhoneNumbersWithAsterisks(element.childNodes[i]);
             }
