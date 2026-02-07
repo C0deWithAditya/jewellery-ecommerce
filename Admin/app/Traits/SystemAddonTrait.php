@@ -9,14 +9,14 @@ trait SystemAddonTrait
      */
     public function get_addons(): array
     {
-        $dir = 'Modules';
-        $directories = self::getDirectories($dir);
+        $dir = base_path('Modules');
+        $directories = is_dir($dir) ? self::getDirectories($dir) : [];
 
         $addons = [];
         foreach ($directories as $directory) {
-            $sub_dirs = self::getDirectories('Modules/' . $directory);
+            $sub_dirs = is_dir($dir . '/' . $directory) ? self::getDirectories($dir . '/' . $directory) : [];
             if (in_array('Addon', $sub_dirs)) {
-                $addons[] = 'Modules/' . $directory;
+                $addons[] = $dir . '/' . $directory;
             }
         }
 
@@ -38,13 +38,13 @@ trait SystemAddonTrait
      */
     public function get_addon_admin_routes(): array
     {
-        $dir = 'Modules';
-        $directories = self::getDirectories($dir);
+        $dir = base_path('Modules');
+        $directories = is_dir($dir) ? self::getDirectories($dir) : [];
         $addons = [];
         foreach ($directories as $directory) {
-            $sub_dirs = self::getDirectories('Modules/' . $directory);
+            $sub_dirs = is_dir($dir . '/' . $directory) ? self::getDirectories($dir . '/' . $directory) : [];
             if (in_array('Addon', $sub_dirs)) {
-                $addons[] = 'Modules/' . $directory;
+                $addons[] = $dir . '/' . $directory;
             }
         }
 
@@ -64,12 +64,12 @@ trait SystemAddonTrait
      */
     public function get_payment_publish_status(): array
     {
-        $dir = 'Modules'; // Update the directory path to Modules/Gateways
-        $directories = self::getDirectories($dir);
+        $dir = base_path('Modules'); // Update the directory path to Modules/Gateways
+        $directories = is_dir($dir) ? self::getDirectories($dir) : [];
         // dd($directories);
         $addons = [];
         foreach ($directories as $directory) {
-            $sub_dirs = self::getDirectories($dir . '/' . $directory); // Use $dir instead of 'Modules/'
+            $sub_dirs = is_dir($dir . '/' . $directory) ? self::getDirectories($dir . '/' . $directory) : []; // Use $dir instead of 'Modules/'
             if($directory == 'Gateways'){
                 if (in_array('Addon', $sub_dirs)) {
                     $addons[] = $dir . '/' . $directory; // Use $dir instead of 'Modules/'
@@ -97,6 +97,7 @@ trait SystemAddonTrait
     function getDirectories(string $path): array
     {
         $directories = [];
+        if (!is_dir($path)) return [];
         $items = scandir($path);
         foreach ($items as $item) {
             if ($item == '..' || $item == '.')
