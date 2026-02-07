@@ -50,17 +50,19 @@
     let passwordField = document.getElementById('password');
     let confirmationField = document.getElementById('confirm_password');
 
-    confirmationField.addEventListener('input', () => {
-        if (confirmationField.value === '') {
-            confirmationField.setCustomValidity('');
-            return;
-        }
-        if (passwordField.value === confirmationField.value) {
-            confirmationField.setCustomValidity('');
-        } else {
-            confirmationField.setCustomValidity('The passwords do not match');
-        }
-    });
+    if (passwordField && confirmationField) {
+        confirmationField.addEventListener('input', () => {
+            if (confirmationField.value === '') {
+                confirmationField.setCustomValidity('');
+                return;
+            }
+            if (passwordField.value === confirmationField.value) {
+                confirmationField.setCustomValidity('');
+            } else {
+                confirmationField.setCustomValidity('The passwords do not match');
+            }
+        });
+    }
 </script>
 
 </html>
