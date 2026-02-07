@@ -1,6 +1,6 @@
 <div class="card-header">
     <h4 class="d-flex align-items-center text-capitalize gap-10 mb-0">
-        <img width="20" src="{{asset('public/assets/admin/img/icons/top-rated.png')}}" alt="{{ translate('image') }}">
+        <img width="20" src="{{asset('assets/admin/img/icons/top-rated.png')}}" alt="{{ translate('image') }}">
         {{translate('most_rated_products')}}
     </h4>
 </div>

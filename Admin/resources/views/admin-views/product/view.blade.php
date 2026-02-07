@@ -7,7 +7,7 @@
         <div class="mb-3">
             <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center">
                 <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                    <img width="20" src="{{asset('public/assets/admin/img/icons/product.png')}}" alt="{{ translate('product') }}">
+                    <img width="20" src="{{asset('assets/admin/img/icons/product.png')}}" alt="{{ translate('product') }}">
                     {{$product['name']}}
                 </h2>
                 <a href="{{url()->previous()}}" class="btn btn-primary">

@@ -3,7 +3,7 @@
 @section('title', translate('Messages'))
 
 @push('css_or_js')
-    <link rel="stylesheet" href="{{asset('/public/assets/admin/css/lightbox.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/lightbox.min.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 
@@ -11,7 +11,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/message.png')}}" alt="{{ translate('message') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/message.png')}}" alt="{{ translate('message') }}">
                 {{translate('conversation_list')}}
             </h2>
         </div>

@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/banner.png')}}" alt="{{ translate('banner') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/banner.png')}}" alt="{{ translate('banner') }}">
                 {{translate('update_banner')}}
             </h2>
         </div>
@@ -82,7 +82,7 @@
                                                   src="{{Helpers::onErrorImage(
                                                             $banner['image'],
                                                             asset('storage/app/public/banner').'/' . $banner['image'],
-                                                            asset('public/assets/admin/img/ratio/2_1.png') ,
+                                                            asset('assets/admin/img/ratio/2_1.png') ,
                                                             'banner/')}}"
                                                   class="w-100" alt="{{ translate('banner') }}">
                                         </div>
@@ -113,7 +113,7 @@
                                                 src="{{Helpers::onErrorImage(
                                                             $banner['image'],
                                                             asset('storage/app/public/banner').'/' . $banner['image'],
-                                                            asset('public/assets/admin/img/ratio/1_1.png') ,
+                                                            asset('assets/admin/img/ratio/1_1.png') ,
                                                             'banner/')}}"
                                                   class="w-100" alt="{{ translate('banner') }}">
                                         </div>
@@ -138,6 +138,6 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin/js/image-upload.js') }}"></script>
-    <script src="{{ asset('public/assets/admin/js/banner.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/image-upload.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/banner.js') }}"></script>
 @endpush

@@ -23,7 +23,7 @@
                     {{ translate('Read Documentation') }}
                     <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                           data-bs-title="Follow our documentation">
-                        <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}" class="svg" alt="{{ translate('image') }}">
+                        <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}" class="svg" alt="{{ translate('image') }}">
                     </span>
                 </a>
             </div>
@@ -42,13 +42,13 @@
                     <div class="row g-4 g-md-5">
                         <div class="col-md-6">
                             <div class="d-flex gap-3 align-items-center">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/php-version.svg')}}" alt="{{ translate('image') }}">
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/php-version.svg')}}" alt="{{ translate('image') }}">
                                 <div class="d-flex align-items-center gap-2 justify-content-between flex-grow-1">
                                     {{ translate('PHP Version 8.0 +') }}
 
                                     @php($phpVersion = number_format((float)phpversion(), 2, '.', ''))
                                     @if ($phpVersion >= 8.0)
-                                        <img width="20" src="{{asset('public/assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
+                                        <img width="20" src="{{asset('assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
                                     @else
                                         <span class="cursor-pointer" data-bs-toggle="tooltip"
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
@@ -56,7 +56,7 @@
                                               data-bs-title="Your php version in server is lower than 8.0 version
                                                    <a href='https://support.cpanel.net/hc/en-us/articles/360052624713-How-to-change-the-PHP-version-for-a-domain-in-cPanel-or-WHM'
                                                    class='d-block' target='_blank'>See how to update</a> ">
-                                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}"
+                                                <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}"
                                                     class="svg text-danger" alt="{{ translate('image') }}">
                                             </span>
                                     @endif
@@ -66,19 +66,19 @@
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex gap-3 align-items-center">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/curl-enabled.svg')}}" alt="{{ translate('image') }}">
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/curl-enabled.svg')}}" alt="{{ translate('image') }}">
                                 <div
                                     class="d-flex align-items-center gap-2 justify-content-between flex-grow-1">
                                     {{ translate('Curl Enabled') }}
 
                                     @if ($permission['curl_enabled'])
-                                        <img width="20" src="{{asset('public/assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
+                                        <img width="20" src="{{asset('assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
                                     @else
                                         <span class="cursor-pointer" data-bs-toggle="tooltip"
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true" data-bs-delay='{"hide":1000}'
                                               data-bs-title="Curl extension is not enabled in your server. To enable go to PHP version > extensions and select curl.">
-                                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}"
+                                                <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}"
                                                     class="svg text-danger" alt="{{ translate('image') }}">
                                             </span>
                                     @endif
@@ -88,18 +88,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex gap-3 align-items-center">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/route-service.svg')}}" alt="{{ translate('image') }}">
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/route-service.svg')}}" alt="{{ translate('image') }}">
                                 <div class="d-flex align-items-center gap-2 justify-content-between flex-grow-1">
                                     {{ translate('.env File Permission') }}
 
                                     @if ($permission['db_file_write_perm'])
-                                        <img width="20" src="{{asset('public/assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
+                                        <img width="20" src="{{asset('assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
                                     @else
                                         <span class="cursor-pointer" data-bs-toggle="tooltip"
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true" data-bs-delay='{"hide":1000}'
                                               data-bs-title="Please change env permission">
-                                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}"
+                                                <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}"
                                                     class="svg text-danger" alt="{{ translate('image') }}">
                                             </span>
                                     @endif
@@ -108,18 +108,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex gap-3 align-items-center">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/route-service.svg')}}" alt="{{ translate('image') }}">
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/route-service.svg')}}" alt="{{ translate('image') }}">
                                 <div class="d-flex align-items-center gap-2 justify-content-between flex-grow-1">
                                     {{ translate('RouteServiceProvider.php File Permission') }}
 
                                     @if ($permission['routes_file_write_perm'])
-                                        <img width="20" src="{{asset('public/assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
+                                        <img width="20" src="{{asset('assets/installation/assets/img/svg-icons/check.png')}}" alt="{{ translate('image') }}">
                                     @else
                                         <span class="cursor-pointer" data-bs-toggle="tooltip"
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true" data-bs-delay='{"hide":1000}'
                                               data-bs-title="Please change RouteServiceProvider permission">
-                                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}" class="svg text-danger" alt="{{ translate('image') }}">
+                                                <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}" class="svg text-danger" alt="{{ translate('image') }}">
                                             </span>
                                     @endif
                                 </div>

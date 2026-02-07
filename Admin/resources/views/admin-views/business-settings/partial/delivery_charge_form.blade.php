@@ -213,7 +213,7 @@ $areaCount = $branch->delivery_charge_by_area->count()
                                         @empty
                                             <tr>
                                                 <td colspan="4" class="text-center">
-                                                    <img class="my-4" src="{{ asset('public/assets/admin/svg/components/map.svg') }}" alt="{{ translate('info icon') }}">
+                                                    <img class="my-4" src="{{ asset('assets/admin/svg/components/map.svg') }}" alt="{{ translate('info icon') }}">
                                                     <h4>{{ translate('Create Area/Zip Code') }}</h4>
                                                     <p>{{ translate('Create area/zip code and setup delivery charge') }}</p>
                                                 </td>
@@ -242,7 +242,7 @@ $areaCount = $branch->delivery_charge_by_area->count()
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="{{ asset('public/assets/admin/svg/components/info.svg') }}" alt="{{ translate('image') }}" class="mb-4">
+                    <img src="{{ asset('assets/admin/svg/components/info.svg') }}" alt="{{ translate('image') }}" class="mb-4">
                     <h4>{{ translate('Are You Sure') }}?</h4>
                     <p>{{ translate('Do you want to change the delivery charge setup? You can only use one setup at a time. When you switch to a new setup, the previous one is automatically deactivated.') }}</p>
 
@@ -376,10 +376,10 @@ $areaCount = $branch->delivery_charge_by_area->count()
                 @csrf
                 <div class="modal-body">
                     <div class="text-center my-4">
-                        <img src="{{ asset('public/assets/admin/svg/components/file.svg') }}" alt="{{ translate('image') }}" class="mb-4">
+                        <img src="{{ asset('assets/admin/svg/components/file.svg') }}" alt="{{ translate('image') }}" class="mb-4">
                         <h4>{{ translate('Add New or Replace in the List') }}</h4>
                         <p>{{ translate('You can download the example file to understand how the file must be filled with proper data.') }}
-                            <a href="{{asset('public/assets/area_bulk_format.xlsx')}}" download="" class="fz-16 btn-link">
+                            <a href="{{asset('assets/area_bulk_format.xlsx')}}" download="" class="fz-16 btn-link">
                                 {{translate('Download Format')}}
                             </a>
                         </p>
@@ -409,7 +409,7 @@ $areaCount = $branch->delivery_charge_by_area->count()
                 </button>
             </div>
             <div class="modal-body text-center">
-                <img src="{{ asset('public/assets/admin/svg/components/info.svg') }}" alt="{{ translate('image') }}" class="mb-4">
+                <img src="{{ asset('assets/admin/svg/components/info.svg') }}" alt="{{ translate('image') }}" class="mb-4">
                 <h4>{{ translate('Are You Sure') }}?</h4>
                 <p>{{ translate('Do you want to change the delivery charge setup? You can only use one setup at a time. When you switch to a new setup, the previous one is automatically deactivated.') }}</p>
             </div>
@@ -432,7 +432,7 @@ $areaCount = $branch->delivery_charge_by_area->count()
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="{{ asset('public/assets/admin/svg/components/info.svg') }}" alt="{{ translate('image') }}" class="mb-4">
+                    <img src="{{ asset('assets/admin/svg/components/info.svg') }}" alt="{{ translate('image') }}" class="mb-4">
                     <h4>{{ translate('To Turn Off, Select an Option Below.') }}</h4>
                     <p>{{ translate('If you want to turn off all setup, you need to choose one of the options below and continue. Without this, the delivery charge can’t work.') }}</p>
                 </div>

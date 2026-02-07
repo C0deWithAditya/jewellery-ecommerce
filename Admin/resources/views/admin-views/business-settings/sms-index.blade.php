@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-4">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/third-party.png')}}" alt="{{ translate('3rd_Party') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/third-party.png')}}" alt="{{ translate('3rd_Party') }}">
                 {{translate('3rd_Party')}}
             </h2>
         </div>

@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="24" src="{{asset('public/assets/admin/img/icons/banner.png')}}" alt="{{ translate('banner') }}">
+                <img width="24" src="{{asset('assets/admin/img/icons/banner.png')}}" alt="{{ translate('banner') }}">
                 {{translate('add_new_banner')}}
             </h2>
         </div>
@@ -220,7 +220,7 @@
             </div>
             @if(count($banners)==0)
                 <div class="text-center p-4">
-                    <img class="mb-3 width-7rem" src="{{asset('public/assets/admin//svg/illustrations/sorry.svg')}}" alt="{{ translate('Image Description') }}">
+                    <img class="mb-3 width-7rem" src="{{asset('assets/admin//svg/illustrations/sorry.svg')}}" alt="{{ translate('Image Description') }}">
                     <p class="mb-0">{{ translate('No data to show') }}</p>
                 </div>
             @endif
@@ -230,7 +230,7 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin/js/image-upload.js') }}"></script>
-    <script src="{{ asset('public/assets/admin/js/banner.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/image-upload.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/banner.js') }}"></script>
 
 @endpush

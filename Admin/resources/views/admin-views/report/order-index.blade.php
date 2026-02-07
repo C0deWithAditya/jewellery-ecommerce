@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/order_report.png')}}" alt="{{ translate('order-report') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/order_report.png')}}" alt="{{ translate('order-report') }}">
                 {{translate('order_Report')}}
             </h2>
         </div>
@@ -14,7 +14,7 @@
         <div class="card card-body mb-3">
             <div class="media gap-3 flex-column flex-sm-row align-items-sm-center">
                 <div class="avatar avatar-xl avatar-4by3">
-                    <img class="avatar-img" src="{{asset('public/assets/admin/svg/illustrations/order.png')}}"
+                    <img class="avatar-img" src="{{asset('assets/admin/svg/illustrations/order.png')}}"
                          alt="{{ translate('image') }}">
                 </div>
 
@@ -511,9 +511,9 @@
 
 @push('script_2')
 
-    <script src="{{asset('public/assets/admin')}}/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="{{asset('public/assets/admin')}}/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js"></script>
-    <script src="{{asset('public/assets/admin')}}/js/hs.chartjs-matrix.js"></script>
+    <script src="{{asset('assets/admin')}}/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="{{asset('assets/admin')}}/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js"></script>
+    <script src="{{asset('assets/admin')}}/js/hs.chartjs-matrix.js"></script>
 
     <script>
         "use strict";

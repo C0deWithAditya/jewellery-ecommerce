@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/branch.png')}}" alt="{{ translate('branch') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/branch.png')}}" alt="{{ translate('branch') }}">
                 {{translate('add_new_branch')}}
             </h2>
         </div>
@@ -45,7 +45,7 @@
                                     <div class="upload-file">
                                         <input type="file" name="image" id="customFileEg1" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" class="upload-file__input">
                                         <div class="upload-file__img">
-                                            <img width="150" id="viewer" src="{{asset('public/assets/admin/img/icons/upload_img.png')}}" alt="{{ translate('image') }}">
+                                            <img width="150" id="viewer" src="{{asset('assets/admin/img/icons/upload_img.png')}}" alt="{{ translate('image') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
 
 @push('script_2')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ \App\Model\BusinessSetting::where('key', 'map_api_key')->first()?->value }}&libraries=places&v=3.51"></script>
-    <script src="{{ asset('public/assets/admin/js/image-upload.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/image-upload.js') }}"></script>
 
     <script>
         'use strict';

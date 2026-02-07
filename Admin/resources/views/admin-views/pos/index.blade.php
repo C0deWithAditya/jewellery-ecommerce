@@ -49,7 +49,7 @@
                     </div>
                     @if(count($products)==0)
                         <div class="text-center p-4">
-                            <img class="mb-3 width-7rem" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
+                            <img class="mb-3 width-7rem" src="{{asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
                             <p class="mb-0">{{ translate('No data to show') }}</p>
                         </div>
                     @endif
@@ -577,6 +577,6 @@
 
     </script>
     <script>
-        if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('public/assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
+        if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
     </script>
 @endpush

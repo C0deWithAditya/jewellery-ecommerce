@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ translate('Invoice') }}</title>
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/font/open-sans.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/vendor.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/vendor/icon-set/style.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/theme.minc619.css?v=1.0')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/font/open-sans.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/vendor/icon-set/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/theme.minc619.css?v=1.0')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
 </head>
 
 <body class="footer-offset">
@@ -21,7 +21,7 @@
                      src="{{Helpers::onErrorImage(
                             $logo,
                             asset('storage/app/public/ecommerce').'/' . $logo,
-                            asset('public/assets/admin/img/160x160/img2.jpg') ,
+                            asset('assets/admin/img/160x160/img2.jpg') ,
                             'ecommerce/')}}"
                      alt="{{  translate('logo') }}">
                 <h3 class="mb-5 mt-2">{{ translate('Invoice') }} : #{{$order['id']}}</h3>
@@ -80,7 +80,7 @@
                                                          src="{{$detail->product['image_fullpath'][0]}}"
                                                          alt="{{ translate('image') }}">
                                                 @else
-                                                    <img src="{{asset('public/assets/admin/img/160x160/img2.jpg')}}"
+                                                    <img src="{{asset('assets/admin/img/160x160/img2.jpg')}}"
                                                          class="img-fit img-fluid rounded aspect-ratio-1" alt="{{ translate('image') }}">
                                                 @endif
                                             </div>
@@ -175,9 +175,9 @@
     </div>
 </main>
 
-<script src="{{asset('public/assets/admin/js/demo.js')}}"></script>
-<script src="{{asset('public/assets/admin/js/vendor.min.js')}}"></script>
-<script src="{{asset('public/assets/admin/js/theme.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/demo.js')}}"></script>
+<script src="{{asset('assets/admin/js/vendor.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/theme.min.js')}}"></script>
 <script>
     window.print();
 </script>

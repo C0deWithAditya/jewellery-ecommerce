@@ -7,10 +7,10 @@
     <title>{{ translate('Error 500') }} | {{ Helpers::get_business_settings('restaurant_name') }}</title>
     @php($icon = \App\Model\BusinessSetting::where(['key' => 'fav_icon'])->first()->value)
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/app/public/ecommerce/' . $icon ?? '') }}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/font/open-sans.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/vendor.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/vendor/icon-set/style.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/theme.minc619.css?v=1.0')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/font/open-sans.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/vendor/icon-set/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/theme.minc619.css?v=1.0')}}">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
         <div class="row align-items-sm-center w-100">
             <div class="col-sm-6">
                 <div class="text-center text-sm-right mr-sm-4 mb-5 mb-sm-0">
-                    <img class="w-60 w-sm-100 mx-auto max-w-15rem" src="{{asset('public/assets/admin//svg/illustrations/think.svg')}}" alt="{{ translate('Image') }}">
+                    <img class="w-60 w-sm-100 mx-auto max-w-15rem" src="{{asset('assets/admin//svg/illustrations/think.svg')}}" alt="{{ translate('Image') }}">
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
     </ul>
 </div>
 
-<script src="{{asset('public/assets/admin/js/theme.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/theme.min.js')}}"></script>
 </body>
 
 </html>

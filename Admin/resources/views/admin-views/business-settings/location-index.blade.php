@@ -7,7 +7,7 @@
     @php($branch_count=\App\Model\Branch::count())
         <div class="mb-4">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/system-setting.png')}}" alt="{{ translate('system-setting-png') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/system-setting.png')}}" alt="{{ translate('system-setting-png') }}">
                 {{translate('system_setup')}}
             </h2>
         </div>

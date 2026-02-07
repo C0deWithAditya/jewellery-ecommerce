@@ -7,7 +7,7 @@
         <div class="d-print-none pb-2">
             <div class="mb-3">
                 <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                    <img width="20" src="{{asset('public/assets/admin/img/icons/customer.png')}}" alt="{{ translate('customer') }}">
+                    <img width="20" src="{{asset('assets/admin/img/icons/customer.png')}}" alt="{{ translate('customer') }}">
                     {{translate('Customer Details')}}
                 </h2>
             </div>

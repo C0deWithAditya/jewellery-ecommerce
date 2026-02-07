@@ -7,7 +7,7 @@
         <div class="page-header">
             <div class="media mb-3">
                 <div class="avatar avatar-xl avatar-4by3 mr-2">
-                    <img class="avatar-img" src="{{asset('public/assets/admin/svg/illustrations/order.png')}}"
+                    <img class="avatar-img" src="{{asset('assets/admin/svg/illustrations/order.png')}}"
                          alt="{{ translate('image') }}">
                 </div>
 
@@ -130,7 +130,7 @@
                     </div>
                     @if(count($data)==0)
                         <div class="text-center p-4">
-                            <img class="mb-3 width-7rem" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
+                            <img class="mb-3 width-7rem" src="{{asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
                             <p class="mb-0">{{ translate('No data to show') }}</p>
                         </div>
                     @endif
@@ -188,7 +188,7 @@
                         },
                         language: {
                             zeroRecords: '<div class="text-center p-4">' +
-                                '<img class="mb-3 width-7rem" src="{{asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                                '<img class="mb-3 width-7rem" src="{{asset('assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
                                 '<p class="mb-0">{{translate('No data to show')}}</p>' +
                                 '</div>'
                         }

@@ -33,19 +33,19 @@
                     <div class="row gy-sm-5 g-4">
                         <div class="col-sm-6">
                             <div class="d-flex gap-4 align-items-center flex-wrap">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/database-name.svg')}}" alt="{{ translate('image') }}">
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/database-name.svg')}}" alt="{{ translate('image') }}">
                                 <div>{{ translate('Database Name') }}</div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="d-flex gap-4 align-items-center flex-wrap">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/database-password.svg')}}" alt="{{ translate('image') }}">
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/database-password.svg')}}" alt="{{ translate('image') }}">
                                 <div>{{ translate('Database Password') }}</div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="d-flex gap-4 align-items-center flex-wrap">
-                                <img src="{{asset('public/assets/installation/assets/img/svg-icons/database-username.svg')}}"
+                                <img src="{{asset('assets/installation/assets/img/svg-icons/database-username.svg')}}"
                                     alt="{{ translate('image') }}">
                                 <div>{{ translate('Database Username') }}</div>
                             </div>
@@ -53,7 +53,7 @@
                         <div class="col-sm-6">
                             <div class="d-flex gap-4 align-items-center flex-wrap">
                                 <img
-                                    src="{{asset('public/assets/installation/assets/img/svg-icons/database-hostname.svg')}}"
+                                    src="{{asset('assets/installation/assets/img/svg-icons/database-hostname.svg')}}"
                                     alt="{{ translate('image') }}">
                                 <div>{{ translate('Database Host Name') }}</div>
                             </div>

@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/order_report.png')}}" alt="{{ translate('order-report') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/order_report.png')}}" alt="{{ translate('order-report') }}">
                 {{translate('deliveryman_report')}}
             </h2>
         </div>
@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="media gap-3 flex-column flex-sm-row align-items-sm-center">
                     <div class="avatar avatar-xl avatar-4by3 mr-2">
-                        <img class="avatar-img" src="{{asset('public/assets/admin/svg/illustrations/order.png')}}" alt="{{ translate('image') }}">
+                        <img class="avatar-img" src="{{asset('assets/admin/svg/illustrations/order.png')}}" alt="{{ translate('image') }}">
                     </div>
 
                     <div class="media-body">
@@ -191,7 +191,7 @@
             </div>
             @if(count($orders)==0)
                 <div class="text-center p-4">
-                    <img class="mb-3 width-7rem" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
+                    <img class="mb-3 width-7rem" src="{{asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
                     <p class="mb-0">{{ translate('No data to show') }}</p>
                 </div>
             @endif

@@ -104,8 +104,8 @@
 
 </form>
 
-<script src="{{asset('public/assets/admin/js/tags-input.min.js')}}"></script>
-<script src="{{asset('public/assets/admin/js/spartan-multi-image-picker.js')}}"></script>
+<script src="{{asset('assets/admin/js/tags-input.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/spartan-multi-image-picker.js')}}"></script>
 
 <script>
 

@@ -20,7 +20,7 @@
             <a href="#" class="d-flex align-items-center gap-1">
                 <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                       data-bs-title="Follow our documentation">
-                    <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}" alt="{{ translate('image') }}" class="svg">
+                    <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}" alt="{{ translate('image') }}" class="svg">
                 </span>
             </a>
         </div>
@@ -87,9 +87,9 @@
                                                autocomplete="new-password" class="form-control" name="DB_PASSWORD" required
                                                placeholder="{{ translate('Ex: password') }}">
                                         <div class="togglePassword">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/eye.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/eye.svg')}}"
                                                 alt="{{ translate('image') }}" class="svg eye">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/eye-off.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/eye-off.svg')}}"
                                                 alt="{{ translate('image') }}"
                                                 class="svg eye-off">
                                         </div>

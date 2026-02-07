@@ -23,7 +23,7 @@
                     {{ translate('Where to get this information') }}?
                     <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                           data-bs-title="Purchase code information">
-                        <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}" alt="{{ translate('image') }}" class="svg">
+                        <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}" alt="{{ translate('image') }}" class="svg">
                     </span>
                 </a>
             </div>
@@ -48,7 +48,7 @@
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true"
                                               data-bs-title="The username of your codecanyon account">
-                                                    <img src="{{asset('public/assets/installation/assets/img/svg-icons/info2.svg')}}"
+                                                    <img src="{{asset('assets/installation/assets/img/svg-icons/info2.svg')}}"
                                                         class="svg" alt="{{ translate('image') }}">
                                                 </span>
                                     </label>
@@ -64,7 +64,7 @@
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true"
                                               data-bs-title="The purchase code of system">
-                                                    <img src="{{asset('public/assets/installation/assets/img/svg-icons/info2.svg')}}"
+                                                    <img src="{{asset('assets/installation/assets/img/svg-icons/info2.svg')}}"
                                                         class="svg" alt="{{ translate('image') }}">
                                                 </span>
                                     </label>

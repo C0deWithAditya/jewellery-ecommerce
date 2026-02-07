@@ -21,7 +21,7 @@
             <a href="#" class="d-flex align-items-center gap-1">
                 <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                       data-bs-title="Admin setup">
-                    <img src="{{asset('public/assets/installation/assets/img/svg-icons/info.svg')}}" alt="{{ translate('image') }}" class="svg">
+                    <img src="{{asset('assets/installation/assets/img/svg-icons/info.svg')}}" alt="{{ translate('image') }}" class="svg">
                 </span>
             </a>
         </div>
@@ -68,7 +68,7 @@
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true"
                                               data-bs-title="Provide an valid number. This number will be use to send verification code and other attachments in future">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/info2.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/info2.svg')}}"
                                                  class="svg" alt="{{ translate('image') }}">
                                         </span>
                                     </label>
@@ -92,7 +92,7 @@
                                               data-bs-placement="top" data-bs-custom-class="custom-tooltip"
                                               data-bs-html="true"
                                               data-bs-title="Provide an valid email. This email will be use to send verification code and other attachments in future">
-                                                    <img src="{{asset('public/assets/installation/assets/img/svg-icons/info2.svg')}}"
+                                                    <img src="{{asset('assets/installation/assets/img/svg-icons/info2.svg')}}"
                                                         class="svg" alt="{{ translate('image') }}">
                                                 </span>
                                     </label>
@@ -110,9 +110,9 @@
                                                name="password" required class="form-control"
                                                placeholder="Ex: 8+ character" minlength="8">
                                         <div class="togglePassword">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/eye.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/eye.svg')}}"
                                                 alt="{{ translate('image') }}" class="svg eye">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/eye-off.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/eye-off.svg')}}"
                                                 alt="{{ translate('image') }}" class="svg eye-off">
                                         </div>
                                     </div>
@@ -125,9 +125,9 @@
                                         <input type="password" autocomplete="new-password" id="confirm_password"
                                               name="confirm_password" class="form-control" placeholder="Ex: 8+ character" required>
                                         <div class="togglePassword">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/eye.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/eye.svg')}}"
                                                 alt="{{ translate('image') }}" class="svg eye">
-                                            <img src="{{asset('public/assets/installation/assets/img/svg-icons/eye-off.svg')}}"
+                                            <img src="{{asset('assets/installation/assets/img/svg-icons/eye-off.svg')}}"
                                                 alt="{{ translate('image') }}" class="svg eye-off">
                                         </div>
                                     </div>

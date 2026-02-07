@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img src="{{asset('public/assets/admin/img/icons/all_orders.png')}}" alt="{{ translate('orders') }}">
+                <img src="{{asset('assets/admin/img/icons/all_orders.png')}}" alt="{{ translate('orders') }}">
                 {{translate('pos_orders')}}
             </h2>
             <span class="badge badge-soft-dark rounded-50 fs-14">{{ $orders->total() }}</span>
@@ -66,7 +66,7 @@
                                 <li>
                                     <a type="submit" class="dropdown-item d-flex align-items-center gap-2"
                                        href="{{route('branch.pos.orders.export', ['start_date'=>Request::get('start_date'), 'end_date'=>Request::get('end_date'), 'search'=>Request::get('search')])}}">
-                                        <img width="14" src="{{asset('public/assets/admin/img/icons/excel.png')}}" alt="{{ translate('excel') }}">
+                                        <img width="14" src="{{asset('assets/admin/img/icons/excel.png')}}" alt="{{ translate('excel') }}">
                                         {{translate('excel')}}
                                     </a>
                                 </li>
@@ -164,7 +164,7 @@
             </div>
             @if(count($orders)==0)
                 <div class="text-center p-4">
-                    <img class="mb-3 width-7rem" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
+                    <img class="mb-3 width-7rem" src="{{asset('assets/admin/svg/illustrations/sorry.svg')}}" alt="{{ translate('image') }}">
                     <p class="mb-0">{{ translate('No data to show') }}</p>
                 </div>
             @endif

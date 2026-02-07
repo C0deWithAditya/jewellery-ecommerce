@@ -13,7 +13,7 @@
                 <div class="row justify-content-between align-items-center g-2 mb-3">
                     <div class="col-auto">
                         <h4 class="d-flex align-items-center gap-10 mb-0">
-                            <img width="20" src="{{asset('public/assets/admin/img/icons/business_analytics.png')}}" alt="{{ translate('Business Analytics') }}">
+                            <img width="20" src="{{asset('assets/admin/img/icons/business_analytics.png')}}" alt="{{ translate('Business Analytics') }}">
                             {{translate('Business_Analytics')}}
                         </h4>
                     </div>
@@ -42,7 +42,7 @@
                 <div class="row g-2 align-items-center mb-2">
                     <div class="col-md-6">
                         <h4 class="d-flex align-items-center text-capitalize gap-10 mb-0">
-                            <img width="20" src="{{asset('public/assets/admin/img/icons/earning_statictics.png')}}" alt="Earning Statistics">
+                            <img width="20" src="{{asset('assets/admin/img/icons/earning_statictics.png')}}" alt="Earning Statistics">
                             {{ translate('Earning_statistics') }}
                         </h4>
                     </div>
@@ -151,9 +151,9 @@
 @endsection
 
 @push('script')
-    <script src="{{asset('public/assets/admin/vendor/chart.js/dist/Chart.min.js')}}"></script>
-    <script src="{{asset('public/assets/admin/vendor/chart.js.extensions/chartjs-extensions.js')}}"></script>
-    <script src="{{asset('public/assets/admin/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js')}}"></script>
+    <script src="{{asset('assets/admin/vendor/chart.js/dist/Chart.min.js')}}"></script>
+    <script src="{{asset('assets/admin/vendor/chart.js.extensions/chartjs-extensions.js')}}"></script>
+    <script src="{{asset('assets/admin/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js')}}"></script>
 @endpush
 
 

@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-4">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/third-party.png')}}" alt="{{ translate('3rd_Party_image') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/third-party.png')}}" alt="{{ translate('3rd_Party_image') }}">
                 {{translate('3rd_Party')}}
             </h2>
         </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="text-center my-5">
-                        <img src="{{ asset('public/assets/admin/svg/components/instruction.svg') }}">
+                        <img src="{{ asset('assets/admin/svg/components/instruction.svg') }}">
                     </div>
 
                     <h5 class="modal-title my-3" id="instructionsModalLabel">{{translate('Instructions')}}</h5>

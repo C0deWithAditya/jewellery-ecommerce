@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="16" src="{{asset('public/assets/admin/img/icons/flash-sale.png')}}" alt="{{ translate('flash-sale') }}">
+                <img width="16" src="{{asset('assets/admin/img/icons/flash-sale.png')}}" alt="{{ translate('flash-sale') }}">
                 {{translate('Update Flash sale')}}
             </h2>
         </div>
@@ -53,7 +53,7 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin/js/image-upload.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/image-upload.js') }}"></script>
 
     <script>
         "use strict"

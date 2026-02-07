@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/business-setup.png')}}" alt="{{ translate('business_setup_image') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/business-setup.png')}}" alt="{{ translate('business_setup_image') }}">
                 {{translate('business_Setup')}}
             </h2>
         </div>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="modal-body text-center">
                     <div>
-                        <img class="w-100px" src="{{ asset('public/assets/admin/img/OTP-Verification.png') }}" alt="{{ translate('image') }}">
+                        <img class="w-100px" src="{{ asset('assets/admin/img/OTP-Verification.png') }}" alt="{{ translate('image') }}">
                     </div>
                     <div class="py-4">
                         <h5 class="modal-title" id="smsConfigModalLabel">{{ translate('Set Up SMS Configuration/Firebase Auth First') }}</h5>
@@ -191,7 +191,7 @@
                 </div>
                 <div class="modal-body text-center">
                     <div>
-                        <img class="w-100px" src="{{ asset('public/assets/admin/img/apple-logo.png') }}" alt="{{ translate('image') }}">
+                        <img class="w-100px" src="{{ asset('assets/admin/img/apple-logo.png') }}" alt="{{ translate('image') }}">
                     </div>
                     <div class="py-4">
                         <h5 class="modal-title" id="socialMediaConfigModalLabel">{{ translate('Set Up Apple Configuration First') }}</h5>

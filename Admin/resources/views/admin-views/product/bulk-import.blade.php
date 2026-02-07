@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/bulk-import.png')}}" alt="{{ translate('bulk-import') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/bulk-import.png')}}" alt="{{ translate('bulk-import') }}">
                 {{translate('bulk_import')}}
             </h2>
         </div>
@@ -31,7 +31,7 @@
                     <div class="rest-part">
                         <div class="d-flex flex-wrap justify-content-center gap-3 align-items-center mb-4">
                             <h4 class="mb-0">{{ translate('Don`t have the template') }}?</h4>
-                            <a href="{{asset('public/assets/product_bulk_format.xlsx')}}" download=""
+                            <a href="{{asset('assets/product_bulk_format.xlsx')}}" download=""
                             class="text-primary font-weight-bold fs-16">{{ translate('Download Format') }}</a>
                         </div>
                         <div class="form-group">
@@ -40,7 +40,7 @@
                                     <div class="upload-file">
                                         <input type="file" name="products_file" accept=".xlsx, .xls" class="upload-file__input">
                                         <div class="upload-file__img_drag upload-file__img">
-                                            <img src="{{asset('public/assets/admin/img/icons/drag-upload-file.png')}}" alt="{{ translate('upload') }}">
+                                            <img src="{{asset('assets/admin/img/icons/drag-upload-file.png')}}" alt="{{ translate('upload') }}">
                                         </div>
                                     </div>
                                 </div>

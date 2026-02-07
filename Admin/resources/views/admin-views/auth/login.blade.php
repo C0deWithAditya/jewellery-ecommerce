@@ -11,20 +11,20 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/app/public/ecommerce/' . $icon ?? '') }}">
     <link rel="shortcut icon" href="#">
 
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/font/open-sans.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/font/open-sans.css')}}">
 
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/vendor.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/vendor/icon-set/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/vendor.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/vendor/icon-set/style.css')}}">
 
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/theme.minc619.css?v=1.0')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('public/assets/admin/css/toastr.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/theme.minc619.css?v=1.0')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/toastr.css')}}">
 </head>
 
 <body>
 <main id="content" role="main" class="main">
     <div class="d-flex flex-column flex-md-row min-vh-100">
-        <div class="d-none d-md-flex justify-content-center flex-grow-1 bg-light login-bg-box md-w-50" data-bg-img="{{asset('public/assets/admin/img/login_bg.png')}}">
+        <div class="d-none d-md-flex justify-content-center flex-grow-1 bg-light login-bg-box md-w-50" data-bg-img="{{asset('assets/admin/img/login_bg.png')}}">
             <div class="login-left-content p-3">
                 <a class="d-flex mb-4" href="javascript:">
                     <img class="z-index-2 height-60px"
@@ -159,9 +159,9 @@
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{{asset('public/assets/admin/js/vendor.min.js')}}"></script>
-<script src="{{asset('public/assets/admin/js/theme.min.js')}}"></script>
-<script src="{{asset('public/assets/admin/js/toastr.js')}}"></script>
+<script src="{{asset('assets/admin/js/vendor.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/theme.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/toastr.js')}}"></script>
 {!! Toastr::message() !!}
 
 @if ($errors->any())
@@ -272,7 +272,7 @@
 </script>
 
 <script>
-    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('public/assets/admin/vendor/babel-polyfill/polyfill.min.js')}}"><\/script>');
+    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('assets/admin/vendor/babel-polyfill/polyfill.min.js')}}"><\/script>');
 </script>
 </body>
 </html>

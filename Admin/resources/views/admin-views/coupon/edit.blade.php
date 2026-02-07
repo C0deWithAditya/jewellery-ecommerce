@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/coupon.png')}}" alt="{{ translate('coupon') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/coupon.png')}}" alt="{{ translate('coupon') }}">
                 {{translate('update_coupon')}}
             </h2>
         </div>
@@ -115,5 +115,5 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin/js/coupon.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/coupon.js') }}"></script>
 @endpush

@@ -6,7 +6,7 @@
     <div class="content container-fluid">
         <div class="mb-3">
             <h2 class="text-capitalize mb-0 d-flex align-items-center gap-2">
-                <img width="20" src="{{asset('public/assets/admin/img/icons/business-setup.png')}}" alt="{{ translate('business-setup') }}">
+                <img width="20" src="{{asset('assets/admin/img/icons/business-setup.png')}}" alt="{{ translate('business-setup') }}">
                 {{translate('business_Setup')}}
             </h2>
         </div>
@@ -626,7 +626,7 @@
                 <div class="modal-body">
                     <div class="text-center">
                         <div class="my-4">
-                            <img src="{{ asset('public/assets/admin/svg/components/map-icon.svg') }}" alt="Checked Icon">
+                            <img src="{{ asset('assets/admin/svg/components/map-icon.svg') }}" alt="Checked Icon">
                         </div>
                         <div class="my-4">
                             <h4>{{ translate('Turn off google Map') }}?</h4>
@@ -653,7 +653,7 @@
                 <div class="modal-body">
                     <div class="">
                         <div class="text-center mb-5">
-                            <img src="{{ asset('public/assets/admin/svg/components/map-icon.svg') }}" alt="Unchecked Icon" class="mb-5">
+                            <img src="{{ asset('assets/admin/svg/components/map-icon.svg') }}" alt="Unchecked Icon" class="mb-5">
                             <h4>{{ translate('Are You Sure') }}?</h4>
                             <p>{{ translate('By Turning On the Google Maps you need to setup following setting to get the map work properly.') }}</p>
                         </div>
@@ -663,7 +663,7 @@
                                 <a class="d-flex align-items-center border rounded px-3 py-2 g-1"
                                    href="{{ route('admin.customer.list') }}"
                                    target="_blank">
-                                    <img src="{{ asset('public/assets/admin/svg/components/people.svg') }}" width="21" alt="">
+                                    <img src="{{ asset('assets/admin/svg/components/people.svg') }}" width="21" alt="">
                                     <span>{{ translate('Map Location in Customer Addresses') }}</span>
                                 </a>
                             </div>
@@ -671,13 +671,13 @@
                                 <a class="d-flex align-items-center border rounded px-3 py-2 g-1"
                                    href="{{ route('admin.branch.list') }}"
                                    target="_blank">
-                                    <img src="{{ asset('public/assets/admin/svg/components/branch.svg') }}" width="21" alt="">
+                                    <img src="{{ asset('assets/admin/svg/components/branch.svg') }}" width="21" alt="">
                                     <span>{{ translate('Map in Branch Coverage Area') }}</span>
                                 </a>
                             </div>
                             <div class="col-12 mb-2">
                                 <div class="d-flex align-items-center border rounded px-3 py-2 g-1">
-                                    <img src="{{ asset('public/assets/admin/svg/components/delivery-car.svg') }}" width="21" alt="">
+                                    <img src="{{ asset('assets/admin/svg/components/delivery-car.svg') }}" width="21" alt="">
                                     <span class="text-primary">{{ translate('Deliveryman Live Location on Customer & Deliveryman App & web') }}</span>
                                 </div>
                             </div>
@@ -685,7 +685,7 @@
                                 <a class="d-flex align-items-center border rounded px-3 py-2 g-1"
                                    href="{{ route('admin.business-settings.delivery-fee-setup') }}"
                                    target="_blank">
-                                    <img src="{{ asset('public/assets/admin/svg/components/delivery-charge.svg') }}" width="21" alt="">
+                                    <img src="{{ asset('assets/admin/svg/components/delivery-charge.svg') }}" width="21" alt="">
                                     <span>{{ translate('Delivery Charge Setup') }}</span>
                                 </a>
                             </div>
@@ -713,7 +713,7 @@
                 <div class="modal-body">
                     <div class="text-center">
                         <div class="my-4">
-                            <img src="{{ asset('public/assets/admin/svg/components/map-icon.svg') }}" alt="Checked Icon">
+                            <img src="{{ asset('assets/admin/svg/components/map-icon.svg') }}" alt="Checked Icon">
                         </div>
                         <div class="my-4">
                             <h4>{{ translate('Turn on google Map') }}?</h4>
@@ -734,7 +734,7 @@
 @endsection
 
 @push('script_2')
-    <script src="{{ asset('public/assets/admin/js/business-settings.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/business-settings.js') }}"></script>
 
     <script>
         "use strict";
