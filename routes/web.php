@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymobController;
 use App\Http\Controllers\FlutterwaveController;
 use App\Http\Controllers\BkashPaymentController;
 use App\Http\Controllers\MercadoPagoController;
+use App\Http\Controllers\IciciPaymentController;
 
 Route::get('/', function () {
     return redirect(\route('admin.dashboard'));
@@ -109,6 +110,13 @@ if (!$is_published) {
         Route::group(['prefix' => 'mercadopago', 'as' => 'mercadopago.'], function () {
             Route::get('pay', [MercadoPagoController::class, 'index'])->name('index');
             Route::post('make-payment', [MercadoPagoController::class, 'make_payment'])->name('make_payment');
+        });
+
+        //ICICI EAZYPAY
+        Route::group(['prefix' => 'icici', 'as' => 'icici.'], function () {
+            Route::get('pay', [IciciPaymentController::class, 'index'])->name('pay');
+            Route::post('initiate', [IciciPaymentController::class, 'initiatePayment'])->name('initiate');
+            Route::any('callback', [IciciPaymentController::class, 'callback'])->name('callback')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
         });
     });
 }
