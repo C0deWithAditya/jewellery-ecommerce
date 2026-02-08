@@ -201,4 +201,16 @@ Route::group(['namespace' => 'Api\V1', 'middleware' => 'localization'], function
         });
     });
 
+    // =============================================
+    // METAL RATES API ROUTES (for Flutter Widget)
+    // =============================================
+    Route::group(['prefix' => 'metal-rates'], function () {
+        // Public routes
+        Route::get('current', [\App\Http\Controllers\Api\V1\MetalRateController::class, 'currentRates']);
+        Route::get('detailed', [\App\Http\Controllers\Api\V1\MetalRateController::class, 'detailedRates']);
+        Route::get('history', [\App\Http\Controllers\Api\V1\MetalRateController::class, 'rateHistory']);
+        Route::get('rate', [\App\Http\Controllers\Api\V1\MetalRateController::class, 'getRate']);
+        Route::post('calculate-price', [\App\Http\Controllers\Api\V1\MetalRateController::class, 'calculatePrice']);
+    });
+
 });

@@ -84,8 +84,8 @@
                                     <label for="database-password" class="d-flex align-items-center gap-2 mb-2">{{ translate('Database Password') }}</label>
                                     <div class="input-inner-end-ele position-relative">
                                         <input type="password" id="database-password" min="8"
-                                               autocomplete="new-password" class="form-control" name="DB_PASSWORD" required
-                                               placeholder="{{ translate('Ex: password') }}">
+                                               autocomplete="new-password" class="form-control" name="DB_PASSWORD"
+                                               placeholder="{{ translate('Ex: password (leave empty if no password)') }}">
                                         <div class="togglePassword">
                                             <img src="{{asset('assets/installation/assets/img/svg-icons/eye.svg')}}"
                                                 alt="{{ translate('image') }}" class="svg eye">

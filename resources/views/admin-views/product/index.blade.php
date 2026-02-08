@@ -66,6 +66,9 @@
                         </div>
                     @endif
 
+                    <!-- Jewelry Specific Fields -->
+                    @include('admin-views.product.partials._jewelry-fields')
+
                     <div id="from_part_2">
                         <div class="card mb-3">
                             <div class="card-body">

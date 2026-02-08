@@ -90,13 +90,35 @@ class SipManagementController extends Controller
         }
 
         // Date filter
-        if ($request->has('from') && $request->has('to')) {
-            $query->whereBetween('created_at', [$request->from, $request->to]);
+        if ($request->has('from_date') && !empty($request->from_date)) {
+            $query->whereDate('created_at', '>=', $request->from_date);
+        }
+        if ($request->has('to_date') && !empty($request->to_date)) {
+            $query->whereDate('created_at', '<=', $request->to_date);
+        }
+
+        // Search
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->whereHas('user', function($q) use ($search) {
+                $q->where('f_name', 'like', '%' . $search . '%')
+                  ->orWhere('l_name', 'like', '%' . $search . '%');
+            });
         }
 
         $transactions = $query->latest()->paginate(config('default_pagination', 25));
 
-        return view('admin-views.sip.transactions.index', compact('transactions'));
+        // Stats
+        $stats = [
+            'total' => SipTransaction::count(),
+            'success' => SipTransaction::where('status', 'success')->count(),
+            'pending' => SipTransaction::where('status', 'pending')->count(),
+            'failed' => SipTransaction::where('status', 'failed')->count(),
+            'total_amount' => SipTransaction::where('status', 'success')->sum('amount'),
+            'total_gold' => SipTransaction::where('status', 'success')->sum('gold_grams'),
+        ];
+
+        return view('admin-views.sip.transactions.index', compact('transactions', 'stats'));
     }
 
     /**
@@ -111,9 +133,32 @@ class SipManagementController extends Controller
             $query->where('status', $request->status);
         }
 
+        // Filter by type
+        if ($request->has('type') && !empty($request->type)) {
+            $query->where('withdrawal_type', $request->type);
+        }
+
+        // Search
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->whereHas('user', function($q) use ($search) {
+                $q->where('f_name', 'like', '%' . $search . '%')
+                  ->orWhere('l_name', 'like', '%' . $search . '%')
+                  ->orWhere('phone', 'like', '%' . $search . '%');
+            });
+        }
+
         $withdrawals = $query->latest()->paginate(config('default_pagination', 25));
 
-        return view('admin-views.sip.withdrawals.index', compact('withdrawals'));
+        // Stats
+        $stats = [
+            'pending' => SipWithdrawal::where('status', 'pending')->count(),
+            'processing' => SipWithdrawal::where('status', 'processing')->count(),
+            'completed' => SipWithdrawal::where('status', 'completed')->count(),
+            'rejected' => SipWithdrawal::where('status', 'rejected')->count(),
+        ];
+
+        return view('admin-views.sip.withdrawals.index', compact('withdrawals', 'stats'));
     }
 
     /**
@@ -173,6 +218,27 @@ class SipManagementController extends Controller
         );
 
         Toastr::success(translate('Metal rate updated successfully!'));
+        return back();
+    }
+
+    /**
+     * Sync metal rates from API.
+     */
+    public function syncMetalRates()
+    {
+        try {
+            $metalPriceService = app(\App\Services\MetalPriceService::class);
+            $result = $metalPriceService->syncRatesToDatabase();
+
+            if ($result['success']) {
+                Toastr::success($result['message'] . ' - ' . count($result['updated']) . ' rates updated.');
+            } else {
+                Toastr::error($result['message']);
+            }
+        } catch (\Exception $e) {
+            Toastr::error(translate('Failed to sync rates: ') . $e->getMessage());
+        }
+
         return back();
     }
 

@@ -20,6 +20,14 @@ class Product extends Model
         'updated_at' => 'datetime',
         'wishlist_count' => 'integer',
         'total_stock' => 'integer',
+        // Jewelry specific fields
+        'gross_weight' => 'float',
+        'net_weight' => 'float',
+        'stone_weight' => 'float',
+        'making_charges' => 'float',
+        'stone_charges' => 'float',
+        'other_charges' => 'float',
+        'is_price_dynamic' => 'boolean',
     ];
 
     protected $appends = ['image_fullpath'];

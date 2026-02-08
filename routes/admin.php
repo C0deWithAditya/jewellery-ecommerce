@@ -409,6 +409,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::group(['prefix' => 'metal-rates', 'as' => 'metal-rates.'], function () {
                 Route::get('/', [SipManagementController::class, 'metalRates'])->name('index');
                 Route::post('update', [SipManagementController::class, 'updateMetalRate'])->name('update');
+                Route::post('sync', [SipManagementController::class, 'syncMetalRates'])->name('sync');
             });
 
             // Export

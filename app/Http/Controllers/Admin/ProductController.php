@@ -285,6 +285,43 @@ class ProductController extends Controller
         $product->total_stock = $request->total_stock;
 
         $product->attributes = $request->has('attribute_id') ? json_encode($request->attribute_id) : json_encode([]);
+
+        // Jewelry Specific Fields
+        $product->metal_type = $request->metal_type ?? 'none';
+        $product->metal_purity = $request->metal_purity ?? 'none';
+        $product->gross_weight = $request->gross_weight;
+        $product->net_weight = $request->net_weight;
+        $product->stone_weight = $request->stone_weight;
+        $product->making_charges = $request->making_charges ?? 0;
+        $product->making_charge_type = $request->making_charge_type ?? 'fixed';
+        $product->stone_charges = $request->stone_charges ?? 0;
+        $product->other_charges = $request->other_charges ?? 0;
+        $product->is_price_dynamic = $request->has('is_price_dynamic') ? 1 : 0;
+        $product->hallmark_number = $request->hallmark_number;
+        $product->huid = $request->huid;
+        $product->stone_details = $request->stone_details;
+        $product->design_code = $request->design_code;
+        $product->jewelry_type = $request->jewelry_type;
+        $product->size = $request->size;
+
+        // If dynamic pricing is enabled, calculate price from metal rates
+        if ($product->is_price_dynamic && $product->metal_type != 'none' && $product->net_weight > 0) {
+            $metalPriceService = app(\App\Services\MetalPriceService::class);
+            $priceResult = $metalPriceService->calculateProductPrice(
+                $product->metal_type,
+                $product->metal_purity,
+                $product->net_weight,
+                $product->making_charges,
+                $product->making_charge_type,
+                $product->stone_charges,
+                3 // GST percentage
+            );
+            
+            if ($priceResult['success']) {
+                $product->price = $priceResult['breakdown']['total_price'] + ($product->other_charges ?? 0);
+            }
+        }
+
         $product->save();
 
         $data = [];
@@ -477,6 +514,43 @@ class ProductController extends Controller
         $product->total_stock = $request->total_stock;
 
         $product->attributes = $request->has('attribute_id') ? json_encode($request->attribute_id) : json_encode([]);
+
+        // Jewelry Specific Fields
+        $product->metal_type = $request->metal_type ?? 'none';
+        $product->metal_purity = $request->metal_purity ?? 'none';
+        $product->gross_weight = $request->gross_weight;
+        $product->net_weight = $request->net_weight;
+        $product->stone_weight = $request->stone_weight;
+        $product->making_charges = $request->making_charges ?? 0;
+        $product->making_charge_type = $request->making_charge_type ?? 'fixed';
+        $product->stone_charges = $request->stone_charges ?? 0;
+        $product->other_charges = $request->other_charges ?? 0;
+        $product->is_price_dynamic = $request->has('is_price_dynamic') ? 1 : 0;
+        $product->hallmark_number = $request->hallmark_number;
+        $product->huid = $request->huid;
+        $product->stone_details = $request->stone_details;
+        $product->design_code = $request->design_code;
+        $product->jewelry_type = $request->jewelry_type;
+        $product->size = $request->size;
+
+        // If dynamic pricing is enabled, calculate price from metal rates
+        if ($product->is_price_dynamic && $product->metal_type != 'none' && $product->net_weight > 0) {
+            $metalPriceService = app(\App\Services\MetalPriceService::class);
+            $priceResult = $metalPriceService->calculateProductPrice(
+                $product->metal_type,
+                $product->metal_purity,
+                $product->net_weight,
+                $product->making_charges,
+                $product->making_charge_type,
+                $product->stone_charges,
+                3 // GST percentage
+            );
+            
+            if ($priceResult['success']) {
+                $product->price = $priceResult['breakdown']['total_price'] + ($product->other_charges ?? 0);
+            }
+        }
+
         $product->save();
 
 

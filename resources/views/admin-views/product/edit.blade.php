@@ -80,6 +80,10 @@
                             </div>
                         </div>
                     @endif
+
+                    <!-- Jewelry Specific Fields -->
+                    @include('admin-views.product.partials._jewelry-fields-edit')
+
                     <div id="from_part_2">
                         <div class="row">
                             <div class="col-6">

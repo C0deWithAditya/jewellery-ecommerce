@@ -11,6 +11,17 @@
                         <i class="tio-gem mr-2"></i>
                         {{translate('Metal Rates Management')}}
                     </h1>
+                    <p class="text-muted small mb-0">
+                        {{translate('Manage live metal rates from API or set manually.')}}
+                    </p>
+                </div>
+                <div class="col-sm-auto">
+                    <form action="{{ route('admin.sip.metal-rates.sync') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-success">
+                            <i class="tio-refresh mr-1"></i> {{translate('Sync from API')}}
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

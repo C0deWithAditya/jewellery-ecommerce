@@ -592,6 +592,69 @@
                             </a>
                         </li>
 
+                        <!-- SIP Module Section -->
+                        <li class="nav-item">
+                            <small class="nav-subtitle" title="{{translate('SIP Investment')}}">
+                                <span style="color: #f5af19;">💰</span> {{translate('SIP Investment')}}
+                            </small>
+                            <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+                        </li>
+
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('admin/sip*')?'active':''}}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:">
+                                <i class="tio-diamond nav-icon" style="color: #f5af19;"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                    {{translate('SIP Management')}}
+                                </span>
+                            </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{Request::is('admin/sip*')?'block':'none'}}">
+                                <li class="nav-item {{Request::is('admin/sip/dashboard')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.dashboard')}}" title="{{translate('Dashboard')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('Dashboard')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/sip/kyc*')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.kyc.index')}}" title="{{translate('KYC Verification')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('KYC Verification')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/sip/plan*')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.plan.index')}}" title="{{translate('SIP Plans')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('SIP Plans')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/sip/subscriptions*')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.subscriptions.index')}}" title="{{translate('Subscriptions')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('Subscriptions')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/sip/transactions*')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.transactions.index')}}" title="{{translate('Transactions')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('Transactions')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/sip/withdrawals*')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.withdrawals.index')}}" title="{{translate('Withdrawals')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('Withdrawals')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/sip/metal-rates*')?'active':''}}">
+                                    <a class="nav-link" href="{{route('admin.sip.metal-rates.index')}}" title="{{translate('Metal Rates')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">{{translate('Metal Rates')}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End SIP Module Section -->
+
                         @if(count(config('addon_admin_routes'))>0)
                             <li class="navbar-vertical-aside-has-menu {{Request::is('admin/payment/configuration/*') || Request::is('admin/sms/configuration/*')?'active':''}} mb-5">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
