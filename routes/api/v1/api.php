@@ -177,4 +177,28 @@ Route::group(['namespace' => 'Api\V1', 'middleware' => 'localization'], function
         Route::post('/add', [GuestUserController::class, 'guestStore']);
     });
 
+    // =============================================
+    // SIP MODULE API ROUTES
+    // =============================================
+    Route::group(['prefix' => 'sip'], function () {
+        // Public routes (no auth required)
+        Route::get('metal-rates', [\App\Http\Controllers\Api\V1\SipController::class, 'getMetalRates']);
+        Route::get('plans', [\App\Http\Controllers\Api\V1\SipController::class, 'getPlans']);
+
+        // Protected routes (auth required)
+        Route::group(['middleware' => 'auth:api'], function () {
+            // KYC
+            Route::get('kyc/status', [\App\Http\Controllers\Api\V1\SipController::class, 'getKycStatus']);
+            Route::post('kyc/submit', [\App\Http\Controllers\Api\V1\SipController::class, 'submitKyc']);
+
+            // SIP Subscription
+            Route::post('subscribe', [\App\Http\Controllers\Api\V1\SipController::class, 'subscribe']);
+            Route::get('my-sips', [\App\Http\Controllers\Api\V1\SipController::class, 'getMySips']);
+            Route::get('transactions/{sip_id?}', [\App\Http\Controllers\Api\V1\SipController::class, 'getTransactions']);
+
+            // Withdrawal
+            Route::post('withdrawal/request', [\App\Http\Controllers\Api\V1\SipController::class, 'requestWithdrawal']);
+        });
+    });
+
 });

@@ -25,6 +25,9 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\LoginSetupController;
 use App\Http\Controllers\Admin\DeliveryChargeSetupController;
+use App\Http\Controllers\Admin\SipPlanController;
+use App\Http\Controllers\Admin\KycController;
+use App\Http\Controllers\Admin\SipManagementController;
 
 Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'as' => 'auth.'], function () {
@@ -356,6 +359,60 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('activation',  [AddonController::class, 'activation'])->name('activation');
             Route::post('upload',  [AddonController::class, 'upload'])->name('upload');
             Route::post('delete',  [AddonController::class, 'deleteAddon'])->name('delete');
+        });
+
+        // =============================================
+        // SIP MODULE ROUTES
+        // =============================================
+        Route::group(['prefix' => 'sip', 'as' => 'sip.'], function () {
+            // SIP Dashboard
+            Route::get('dashboard', [SipManagementController::class, 'dashboard'])->name('dashboard');
+
+            // KYC Management
+            Route::group(['prefix' => 'kyc', 'as' => 'kyc.'], function () {
+                Route::get('/', [KycController::class, 'index'])->name('index');
+                Route::get('show/{id}', [KycController::class, 'show'])->name('show');
+                Route::post('approve/{id}', [KycController::class, 'approve'])->name('approve');
+                Route::post('reject/{id}', [KycController::class, 'reject'])->name('reject');
+                Route::get('document/{id}/{type}', [KycController::class, 'viewDocument'])->name('document');
+            });
+
+            // SIP Plans
+            Route::group(['prefix' => 'plan', 'as' => 'plan.'], function () {
+                Route::get('/', [SipPlanController::class, 'index'])->name('index');
+                Route::get('create', [SipPlanController::class, 'create'])->name('create');
+                Route::post('store', [SipPlanController::class, 'store'])->name('store');
+                Route::get('edit/{id}', [SipPlanController::class, 'edit'])->name('edit');
+                Route::post('update/{id}', [SipPlanController::class, 'update'])->name('update');
+                Route::get('toggle-status/{id}', [SipPlanController::class, 'toggleStatus'])->name('toggle-status');
+                Route::delete('delete/{id}', [SipPlanController::class, 'destroy'])->name('delete');
+            });
+
+            // User SIP Subscriptions
+            Route::group(['prefix' => 'subscriptions', 'as' => 'subscriptions.'], function () {
+                Route::get('/', [SipManagementController::class, 'subscriptions'])->name('index');
+                Route::get('show/{id}', [SipManagementController::class, 'showSubscription'])->name('show');
+            });
+
+            // SIP Transactions
+            Route::group(['prefix' => 'transactions', 'as' => 'transactions.'], function () {
+                Route::get('/', [SipManagementController::class, 'transactions'])->name('index');
+            });
+
+            // Withdrawal Requests
+            Route::group(['prefix' => 'withdrawals', 'as' => 'withdrawals.'], function () {
+                Route::get('/', [SipManagementController::class, 'withdrawals'])->name('index');
+                Route::post('process/{id}', [SipManagementController::class, 'processWithdrawal'])->name('process');
+            });
+
+            // Metal Rates
+            Route::group(['prefix' => 'metal-rates', 'as' => 'metal-rates.'], function () {
+                Route::get('/', [SipManagementController::class, 'metalRates'])->name('index');
+                Route::post('update', [SipManagementController::class, 'updateMetalRate'])->name('update');
+            });
+
+            // Export
+            Route::get('export', [SipManagementController::class, 'export'])->name('export');
         });
     });
 });
