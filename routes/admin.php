@@ -382,10 +382,16 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
                 Route::get('/', [SipPlanController::class, 'index'])->name('index');
                 Route::get('create', [SipPlanController::class, 'create'])->name('create');
                 Route::post('store', [SipPlanController::class, 'store'])->name('store');
+                Route::get('show/{id}', [SipPlanController::class, 'show'])->name('show');
                 Route::get('edit/{id}', [SipPlanController::class, 'edit'])->name('edit');
                 Route::post('update/{id}', [SipPlanController::class, 'update'])->name('update');
-                Route::get('toggle-status/{id}', [SipPlanController::class, 'toggleStatus'])->name('toggle-status');
-                Route::delete('delete/{id}', [SipPlanController::class, 'destroy'])->name('delete');
+                Route::post('toggle-status/{id}', [SipPlanController::class, 'toggleStatus'])->name('toggle-status');
+                Route::post('toggle-featured/{id}', [SipPlanController::class, 'toggleFeatured'])->name('toggle-featured');
+                Route::delete('delete/{id}', [SipPlanController::class, 'destroy'])->name('destroy');
+                Route::post('seed-defaults', [SipPlanController::class, 'seedDefaults'])->name('seed-defaults');
+                Route::get('calculate-maturity/{id}', [SipPlanController::class, 'calculateMaturity'])->name('calculate-maturity');
+                Route::post('add-reward/{id}', [SipPlanController::class, 'addReward'])->name('add-reward');
+                Route::delete('remove-reward/{planId}/{rewardId}', [SipPlanController::class, 'removeReward'])->name('remove-reward');
             });
 
             // User SIP Subscriptions

@@ -178,15 +178,20 @@ Route::group(['namespace' => 'Api\V1', 'middleware' => 'localization'], function
     });
 
     // =============================================
-    // SIP MODULE API ROUTES
+    // SIP MODULE API ROUTES (Gold Saving Schemes)
     // =============================================
     Route::group(['prefix' => 'sip'], function () {
         // Public routes (no auth required)
         Route::get('metal-rates', [\App\Http\Controllers\Api\V1\SipController::class, 'getMetalRates']);
         Route::get('plans', [\App\Http\Controllers\Api\V1\SipController::class, 'getPlans']);
+        Route::get('plans/{id}', [\App\Http\Controllers\Api\V1\SipController::class, 'getPlanDetails']);
+        Route::post('calculate-maturity', [\App\Http\Controllers\Api\V1\SipController::class, 'calculateMaturity']);
 
         // Protected routes (auth required)
         Route::group(['middleware' => 'auth:api'], function () {
+            // Dashboard
+            Route::get('dashboard', [\App\Http\Controllers\Api\V1\SipController::class, 'getDashboard']);
+            
             // KYC
             Route::get('kyc/status', [\App\Http\Controllers\Api\V1\SipController::class, 'getKycStatus']);
             Route::post('kyc/submit', [\App\Http\Controllers\Api\V1\SipController::class, 'submitKyc']);
@@ -194,9 +199,13 @@ Route::group(['namespace' => 'Api\V1', 'middleware' => 'localization'], function
             // SIP Subscription
             Route::post('subscribe', [\App\Http\Controllers\Api\V1\SipController::class, 'subscribe']);
             Route::get('my-sips', [\App\Http\Controllers\Api\V1\SipController::class, 'getMySips']);
+            Route::get('my-sips/{id}', [\App\Http\Controllers\Api\V1\SipController::class, 'getSipDetails']);
             Route::get('transactions/{sip_id?}', [\App\Http\Controllers\Api\V1\SipController::class, 'getTransactions']);
 
-            // Withdrawal
+            // Rewards
+            Route::post('rewards/claim', [\App\Http\Controllers\Api\V1\SipController::class, 'claimReward']);
+
+            // Withdrawal/Redemption
             Route::post('withdrawal/request', [\App\Http\Controllers\Api\V1\SipController::class, 'requestWithdrawal']);
         });
     });
