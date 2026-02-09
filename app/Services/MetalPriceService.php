@@ -13,6 +13,7 @@ class MetalPriceService
     protected $apiKey;
     protected $baseUrl = 'https://api.metalpriceapi.com/v1';
     protected $baseCurrency = 'INR';
+    protected $enabled = false;
     
     // Metal symbols
     const GOLD = 'XAU';
@@ -27,7 +28,26 @@ class MetalPriceService
 
     public function __construct()
     {
-        $this->apiKey = config('services.metal_price.api_key', env('METAL_PRICE_API_KEY'));
+        // Get API settings from database
+        $settings = \App\Model\BusinessSetting::where('key', 'metal_price_api')->first();
+        
+        if ($settings && !empty($settings->value)) {
+            $data = json_decode($settings->value, true);
+            $this->apiKey = $data['api_key'] ?? null;
+            $this->enabled = $data['enabled'] ?? false;
+        } else {
+            // Fallback to .env
+            $this->apiKey = env('METAL_PRICE_API_KEY');
+            $this->enabled = env('METAL_RATE_SYNC_ENABLED', false);
+        }
+    }
+
+    /**
+     * Check if API is enabled
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled && !empty($this->apiKey);
     }
 
     /**

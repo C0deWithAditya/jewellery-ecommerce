@@ -410,6 +410,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
                 Route::get('/', [SipManagementController::class, 'metalRates'])->name('index');
                 Route::post('update', [SipManagementController::class, 'updateMetalRate'])->name('update');
                 Route::post('sync', [SipManagementController::class, 'syncMetalRates'])->name('sync');
+                Route::post('save-api-settings', [SipManagementController::class, 'saveApiSettings'])->name('save-api-settings');
+                Route::get('test-api', [SipManagementController::class, 'testApiConnection'])->name('test-api');
             });
 
             // Export

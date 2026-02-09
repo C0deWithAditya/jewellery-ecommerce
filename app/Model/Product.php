@@ -36,15 +36,33 @@ class Product extends Model
     {
         $value = $this->image ?? [];
         $imageUrlArray = is_array($value) ? $value : json_decode($value, true);
-        if (is_array($imageUrlArray)) {
-            foreach ($imageUrlArray as $key => $item) {
-                if (Storage::disk('public')->exists('product/' . $item)) {
-                    $imageUrlArray[$key] = asset('storage/app/public/product/'. $item) ;
-                } else {
-                    $imageUrlArray[$key] = asset('public/assets/admin/img/160x160/img2.jpg');
-                }
+        
+        if (!is_array($imageUrlArray)) {
+            return [];
+        }
+        
+        foreach ($imageUrlArray as $key => $item) {
+            if (empty($item)) {
+                $imageUrlArray[$key] = asset('public/assets/admin/img/160x160/img2.jpg');
+                continue;
+            }
+            
+            // Check if it's already a full URL
+            if (filter_var($item, FILTER_VALIDATE_URL)) {
+                $imageUrlArray[$key] = $item;
+                continue;
+            }
+            
+            // Check if file exists in storage
+            if (Storage::disk('public')->exists('product/' . $item)) {
+                // Use the correct storage URL
+                $imageUrlArray[$key] = asset('storage/product/' . $item);
+            } else {
+                // Fallback to default image
+                $imageUrlArray[$key] = asset('public/assets/admin/img/160x160/img2.jpg');
             }
         }
+        
         return $imageUrlArray;
     }
 
