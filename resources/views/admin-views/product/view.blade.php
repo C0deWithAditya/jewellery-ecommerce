@@ -122,6 +122,38 @@
                         <div>{{translate('discount')}} :
                             <span>{{ $product['discount_type'] == 'amount' ? Helpers::set_symbol($product['discount']) : $product['discount']. '%'}}</span>
                         </div>
+                        
+                        @php
+                            // Calculate tax amount
+                            $taxAmount = Helpers::tax_calculate($product, $product['price']);
+                            // Calculate discount amount
+                            $discountAmount = Helpers::discount_calculate($product, $product['price']);
+                            // Calculate selling price (price + tax - discount)
+                            $sellingPrice = $product['price'] + $taxAmount - $discountAmount;
+                        @endphp
+                        
+                        <hr class="my-3">
+                        <div class="bg-light p-3 rounded">
+                            <h5 class="mb-2">{{translate('Price Breakdown')}}</h5>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>{{translate('Base Price')}}:</span>
+                                <span>{{ Helpers::set_symbol($product['price']) }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1 text-success">
+                                <span>+ {{translate('Tax')}} ({{ $product['tax_type'] == 'percent' ? $product['tax'].'%' : translate('Fixed') }}):</span>
+                                <span>{{ Helpers::set_symbol($taxAmount) }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1 text-danger">
+                                <span>- {{translate('Discount')}} ({{ $product['discount_type'] == 'percent' ? $product['discount'].'%' : translate('Fixed') }}):</span>
+                                <span>{{ Helpers::set_symbol($discountAmount) }}</span>
+                            </div>
+                            <hr class="my-2">
+                            <div class="d-flex justify-content-between">
+                                <strong>{{translate('Selling Price')}}:</strong>
+                                <strong class="text-primary">{{ Helpers::set_symbol($sellingPrice) }}</strong>
+                            </div>
+                        </div>
+                        
                         @if(count(json_decode($product['variations'],true)) > 1)
                             <h4 class="mt-4 mb-3 text-capitalize"> {{translate('variations')}} </h4>
                         @endif
@@ -133,6 +165,7 @@
                             @endforeach
                         </div>
                     </div>
+
 
                     <div class="col-md-6 col-lg-8">
                         <div class="border-md-left pl-md-4 h-100">

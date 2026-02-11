@@ -296,6 +296,8 @@ class ProductController extends Controller
         $product->making_charge_type = $request->making_charge_type ?? 'fixed';
         $product->stone_charges = $request->stone_charges ?? 0;
         $product->other_charges = $request->other_charges ?? 0;
+        $product->wastage_charges = $request->wastage_charges ?? 0;
+        $product->wastage_type = $request->wastage_type ?? 'percentage';
         $product->is_price_dynamic = $request->has('is_price_dynamic') ? 1 : 0;
         $product->hallmark_number = $request->hallmark_number;
         $product->huid = $request->huid;
@@ -303,9 +305,24 @@ class ProductController extends Controller
         $product->design_code = $request->design_code;
         $product->jewelry_type = $request->jewelry_type;
         $product->size = $request->size;
+        
+        // Check if multi-metal product
+        $hasMultipleMetals = $request->has('metal_components') && is_array($request->metal_components) && count($request->metal_components) > 0;
+        $product->is_multi_metal = $hasMultipleMetals;
 
-        // If dynamic pricing is enabled, calculate price from metal rates
-        if ($product->is_price_dynamic && $product->metal_type != 'none' && $product->net_weight > 0) {
+        $product->save();
+
+        // Handle multi-metal components
+        if ($hasMultipleMetals) {
+            $this->saveProductMetals($product, $request->metal_components);
+            
+            // If dynamic pricing is enabled, calculate price from metal components
+            if ($product->is_price_dynamic) {
+                $pricingService = app(\App\Services\ProductPricingService::class);
+                $pricingService->updateProductPrice($product);
+            }
+        } elseif ($product->is_price_dynamic && $product->metal_type != 'none' && $product->net_weight > 0) {
+            // Legacy single metal dynamic pricing
             $metalPriceService = app(\App\Services\MetalPriceService::class);
             $priceResult = $metalPriceService->calculateProductPrice(
                 $product->metal_type,
@@ -314,15 +331,14 @@ class ProductController extends Controller
                 $product->making_charges,
                 $product->making_charge_type,
                 $product->stone_charges,
-                3 // GST percentage
+                0 // GST is handled via Tax field, not here
             );
             
             if ($priceResult['success']) {
                 $product->price = $priceResult['breakdown']['total_price'] + ($product->other_charges ?? 0);
+                $product->save();
             }
         }
-
-        $product->save();
 
         $data = [];
         foreach ($request->lang as $index => $key) {
@@ -348,8 +364,75 @@ class ProductController extends Controller
 
         $this->translation->insert($data);
 
-        return response()->json([], 200);
+        return response()->json(['success' => true, 'message' => 'Product created successfully!'], 200);
     }
+
+
+    /**
+     * Save product metal components.
+     */
+    protected function saveProductMetals(Product $product, array $metals): void
+    {
+        // Delete existing metals
+        $product->metals()->delete();
+        
+        $totalWeight = 0;
+        $sortOrder = 0;
+        
+        foreach ($metals as $metalData) {
+            // Skip empty metal entries
+            $metalType = $metalData['metal_type'] ?? $metalData['type'] ?? null;
+            if (empty($metalType) || empty($metalData['weight'])) {
+                continue;
+            }
+            
+            $weight = floatval($metalData['weight'] ?? 0);
+            $purity = $metalData['purity'] ?? null;
+            $ratePerUnit = !empty($metalData['rate_per_unit']) ? floatval($metalData['rate_per_unit']) : null;
+            $weightUnit = $metalData['weight_unit'] ?? 'gram';
+            
+            // Determine rate source
+            $rateSource = 'live_api';
+            if ($ratePerUnit > 0) {
+                $rateSource = 'manual';
+            }
+            
+            // Get current rate if not manually set
+            if (!$ratePerUnit && in_array($metalType, ['gold', 'silver', 'platinum'])) {
+                $ratePerUnit = \App\Models\MetalRate::getCurrentRate($metalType, $purity) ?? 0;
+                $rateSource = 'live_api';
+            }
+            
+            // Calculate value
+            $calculatedValue = $weight * ($ratePerUnit ?? 0);
+            
+            $product->metals()->create([
+                'metal_type' => $metalType,
+                'purity' => $purity,
+                'weight' => $weight,
+                'weight_unit' => $weightUnit,
+                'rate_per_unit' => $ratePerUnit,
+                'calculated_value' => $calculatedValue,
+                'rate_updated_at' => now(),
+                'rate_source' => $rateSource,
+                'quality_grade' => $metalData['quality_grade'] ?? null,
+                'color' => $metalData['color'] ?? null,
+                'certificate' => $metalData['certificate'] ?? null,
+                'sort_order' => $sortOrder++,
+            ]);
+            
+            // Add to total weight only for grams
+            if ($weightUnit === 'gram') {
+                $totalWeight += $weight;
+            }
+        }
+        
+        // Update gross weight
+        if ($totalWeight > 0) {
+            $product->update(['gross_weight' => $totalWeight]);
+        }
+    }
+
 
     /**
      * @param $id
@@ -357,11 +440,12 @@ class ProductController extends Controller
      */
     public function edit($id): Factory|View|Application
     {
-        $product = $this->product->withoutGlobalScopes()->with('translations')->find($id);
+        $product = $this->product->withoutGlobalScopes()->with(['translations', 'metals'])->find($id);
         $product_category = json_decode($product->category_ids);
         $categories = $this->category->where(['parent_id' => 0])->get();
         return view('admin-views.product.edit', compact('product', 'product_category', 'categories'));
     }
+
 
     /**
      * @param Request $request
@@ -525,6 +609,8 @@ class ProductController extends Controller
         $product->making_charge_type = $request->making_charge_type ?? 'fixed';
         $product->stone_charges = $request->stone_charges ?? 0;
         $product->other_charges = $request->other_charges ?? 0;
+        $product->wastage_charges = $request->wastage_charges ?? 0;
+        $product->wastage_type = $request->wastage_type ?? 'percentage';
         $product->is_price_dynamic = $request->has('is_price_dynamic') ? 1 : 0;
         $product->hallmark_number = $request->hallmark_number;
         $product->huid = $request->huid;
@@ -532,9 +618,24 @@ class ProductController extends Controller
         $product->design_code = $request->design_code;
         $product->jewelry_type = $request->jewelry_type;
         $product->size = $request->size;
+        
+        // Check if multi-metal product
+        $hasMultipleMetals = $request->has('metal_components') && is_array($request->metal_components) && count($request->metal_components) > 0;
+        $product->is_multi_metal = $hasMultipleMetals;
 
-        // If dynamic pricing is enabled, calculate price from metal rates
-        if ($product->is_price_dynamic && $product->metal_type != 'none' && $product->net_weight > 0) {
+        $product->save();
+
+        // Handle multi-metal components
+        if ($hasMultipleMetals) {
+            $this->saveProductMetals($product, $request->metal_components);
+            
+            // If dynamic pricing is enabled, calculate price from metal components
+            if ($product->is_price_dynamic) {
+                $pricingService = app(\App\Services\ProductPricingService::class);
+                $pricingService->updateProductPrice($product);
+            }
+        } elseif ($product->is_price_dynamic && $product->metal_type != 'none' && $product->net_weight > 0) {
+            // Legacy single metal dynamic pricing
             $metalPriceService = app(\App\Services\MetalPriceService::class);
             $priceResult = $metalPriceService->calculateProductPrice(
                 $product->metal_type,
@@ -543,15 +644,14 @@ class ProductController extends Controller
                 $product->making_charges,
                 $product->making_charge_type,
                 $product->stone_charges,
-                3 // GST percentage
+                0 // GST is handled via Tax field, not here
             );
             
             if ($priceResult['success']) {
                 $product->price = $priceResult['breakdown']['total_price'] + ($product->other_charges ?? 0);
+                $product->save();
             }
         }
-
-        $product->save();
 
 
         foreach ($request->lang as $index => $key) {
@@ -575,8 +675,10 @@ class ProductController extends Controller
             }
         }
 
-        return response()->json([], 200);
+        return response()->json(['success' => true, 'message' => 'Product updated successfully!'], 200);
     }
+
+
 
     /**
      * @param Request $request
@@ -812,4 +914,81 @@ class ProductController extends Controller
 
         return (new FastExcel($storage))->download('products.xlsx');
     }
+
+    /**
+     * Preview price calculation for multi-metal products (AJAX).
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function previewPrice(Request $request): JsonResponse
+    {
+        try {
+            $metals = $request->input('metals', []);
+            $charges = [
+                'making_charges' => $request->input('making_charges', 0),
+                'making_charge_type' => $request->input('making_charge_type', 'fixed'),
+                'wastage_charges' => $request->input('wastage_charges', 0),
+                'wastage_type' => $request->input('wastage_type', 'percentage'),
+                'stone_charges' => $request->input('stone_charges', 0),
+                'other_charges' => $request->input('other_charges', 0),
+            ];
+
+            $pricingService = app(\App\Services\ProductPricingService::class);
+            $preview = $pricingService->previewPrice($metals, $charges);
+
+            return response()->json([
+                'success' => true,
+                'data' => $preview,
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Recalculate price for a specific product (AJAX).
+     * 
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function recalculatePrice(Request $request, $id): JsonResponse
+    {
+        try {
+            $product = Product::findOrFail($id);
+
+            if (!$product->is_price_dynamic) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'This product does not have dynamic pricing enabled.',
+                ]);
+            }
+
+            $pricingService = app(\App\Services\ProductPricingService::class);
+            $pricing = $pricingService->calculateProductPrice($product);
+            $pricingService->updateProductPrice($product);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'old_price' => $product->getOriginal('price'),
+                    'new_price' => $product->fresh()->price,
+                    'breakdown' => $pricing,
+                ],
+                'message' => 'Price recalculated successfully.',
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
+

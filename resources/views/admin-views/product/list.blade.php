@@ -84,7 +84,20 @@
                                             </label>
                                         @endif
                                     </td>
-                                    <td>{{ Helpers::set_symbol($product['price']) }}</td>
+                                    @php
+                                        $basePrice = $product['price'];
+                                        $taxAmount = $product['tax_type'] == 'percent' ? ($basePrice * $product['tax'] / 100) : $product['tax'];
+                                        $discountAmount = $product['discount_type'] == 'percent' ? ($basePrice * $product['discount'] / 100) : $product['discount'];
+                                        $sellingPrice = $basePrice + $taxAmount - $discountAmount;
+                                    @endphp
+                                    <td>
+                                        <div>
+                                            {{ Helpers::set_symbol($sellingPrice) }}
+                                            @if($product['discount'] > 0)
+                                                <br><small class="text-muted text-decoration-line-through">{{ Helpers::set_symbol($basePrice) }}</small>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td>
                                         <label class="badge badge-soft-info fs-14">{{$product['total_stock']}}</label>
                                     </td>

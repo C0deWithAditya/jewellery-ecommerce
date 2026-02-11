@@ -90,8 +90,8 @@
                                 <div class="form-group">
                                     <label class="input-label"
                                            for="exampleFormControlInput1">{{translate('price')}}</label>
-                                    <input type="number" value="{{$product['price']}}" min="1" max="100000000" name="price"
-                                           class="form-control" step="0.01"
+                                    <input type="number" value="{{$product['price']}}" min="1" max="100000000" name="price" id="product_price"
+                                           class="form-control selling-price-input" step="0.01"
                                            placeholder="Ex : 100" required>
                                 </div>
                             </div>
@@ -110,8 +110,8 @@
                                 <div class="form-group">
                                     <label class="input-label"
                                            for="exampleFormControlInput1">{{translate('tax')}}</label>
-                                    <input type="number" value="{{$product['tax']}}" min="0" max="100000" name="tax"
-                                           class="form-control" step="0.01"
+                                    <input type="number" value="{{$product['tax']}}" min="0" max="100000" name="tax" id="product_tax"
+                                           class="form-control selling-price-input" step="0.01"
                                            placeholder="Ex : 7" required>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                 <div class="form-group">
                                     <label class="input-label"
                                            for="exampleFormControlInput1">{{translate('tax')}} {{translate('type')}}</label>
-                                    <select name="tax_type" class="form-control js-select2-custom">
+                                    <select name="tax_type" id="tax_type" class="form-control js-select2-custom selling-price-input">
                                         <option
                                             value="percent" {{$product['tax_type']=='percent'?'selected':''}}>{{translate('percent')}}
                                         </option>
@@ -137,7 +137,7 @@
                                     <label class="input-label"
                                            for="exampleFormControlInput1">{{translate('discount')}}</label>
                                     <input type="number" min="0" value="{{$product['discount']}}" max="100000"
-                                           name="discount" class="form-control" step="0.01"
+                                           name="discount" id="product_discount" class="form-control selling-price-input" step="0.01"
                                            placeholder="Ex : 100" required>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                 <div class="form-group">
                                     <label class="input-label"
                                            for="exampleFormControlInput1">{{translate('discount')}} {{translate('type')}}</label>
-                                    <select name="discount_type" class="form-control js-select2-custom">
+                                    <select name="discount_type" id="discount_type" class="form-control js-select2-custom selling-price-input">
                                         <option value="percent" {{$product['discount_type']=='percent'?'selected':''}}>
                                             {{translate('percent')}}
                                         </option>
@@ -161,6 +161,34 @@
                                            for="exampleFormControlInput1">{{translate('stock')}}</label>
                                     <input type="number" min="0" max="100000000" value="{{$product['total_stock']}}" name="total_stock" class="form-control"
                                            placeholder="Ex : 100">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Selling Price Preview -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card bg-gold-light border-0" id="selling_price_preview" style="background-color: #fff9eb; border-left: 5px solid #f5af19 !important;">
+                                    <div class="card-body py-3 font-weight-bold">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <h6 class="mb-0 text-dark"><i class="tio-calculator mr-2"></i>{{translate('Final Selling Price Details')}}</h6>
+                                            </div>
+                                            <div class="col-md-6 text-md-right">
+                                                <div class="d-flex justify-content-md-end gap-3 align-items-center">
+                                                    <div class="text-muted small">
+                                                        {{translate('Tax')}}: <span id="preview_tax_amount" class="text-success">₹0.00</span>
+                                                    </div>
+                                                    <div class="text-muted small">
+                                                        {{translate('Discount')}}: <span id="preview_discount_amount" class="text-danger">₹0.00</span>
+                                                    </div>
+                                                    <div class="ml-2" style="font-size: 1.1rem;">
+                                                        {{translate('Final Price')}}: <strong id="preview_selling_price" class="text-primary">₹0.00</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -340,11 +368,74 @@
             }, 1000)
         });
 
+        // Calculate selling price with tax and discount
+        function calculateSellingPrice() {
+            const priceField = document.getElementById('product_price');
+            const taxField = document.getElementById('product_tax');
+            const taxTypeField = document.getElementById('tax_type');
+            const discountField = document.getElementById('product_discount');
+            const discountTypeField = document.getElementById('discount_type');
+            
+            if (!priceField || !taxField || !discountField) return;
+            
+            const price = parseFloat(priceField.value) || 0;
+            const tax = parseFloat(taxField.value) || 0;
+            const discount = parseFloat(discountField.value) || 0;
+            const taxType = taxTypeField ? taxTypeField.value : 'percent';
+            const discountType = discountTypeField ? discountTypeField.value : 'percent';
+            
+            // Calculate tax amount
+            let taxAmount = 0;
+            if (taxType === 'percent') {
+                taxAmount = (price * tax) / 100;
+            } else {
+                taxAmount = tax;
+            }
+            
+            // Calculate discount amount
+            let discountAmount = 0;
+            if (discountType === 'percent') {
+                discountAmount = (price * discount) / 100;
+            } else {
+                discountAmount = discount;
+            }
+            
+            // Calculate final selling price
+            const sellingPrice = price + taxAmount - discountAmount;
+            
+            // Update preview
+            const taxPreview = document.getElementById('preview_tax_amount');
+            const discountPreview = document.getElementById('preview_discount_amount');
+            const sellingPreview = document.getElementById('preview_selling_price');
+            
+            if (taxPreview) {
+                taxPreview.textContent = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            if (discountPreview) {
+                discountPreview.textContent = '₹' + discountAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            if (sellingPreview) {
+                sellingPreview.textContent = '₹' + sellingPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+        }
+
+        // Add event listeners for selling price calculation
+        $(document).ready(function() {
+            // Listen to all relevant input changes
+            $(document).on('input change', '.selling-price-input', function() {
+                calculateSellingPrice();
+            });
+            
+            // Initial calculation
+            setTimeout(calculateSellingPrice, 1000);
+        });
+
         $(document).on('ready', function () {
             $('.js-select2-custom').each(function () {
                 var select2 = $.HSCore.components.HSSelect2.init($(this));
             });
         });
+
 
         $('#choice_attributes').on('change', function () {
             $('#customer_choice_options').html(null);

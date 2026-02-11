@@ -6,9 +6,9 @@
     <style>
         .scheme-card {
             border-radius: 15px;
-            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 20px;
+            position: relative;
         }
         .scheme-card:hover {
             transform: translateY(-5px);
@@ -18,6 +18,8 @@
             padding: 20px;
             color: white;
             position: relative;
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
         }
         .scheme-header .badge-featured {
             position: absolute;
@@ -94,6 +96,16 @@
         }
         .flexi-save-theme {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .scheme-card .dropdown {
+            position: relative;
+            z-index: 10;
+        }
+        .scheme-card .dropdown-menu {
+            z-index: 1050;
+        }
+        .scheme-card:hover {
+            z-index: 5;
         }
     </style>
 @endpush
@@ -257,10 +269,15 @@
                                     @endif
                                 </div>
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                            type="button" 
+                                            id="dropdownMenuButton{{ $plan->id }}" 
+                                            data-toggle="dropdown" 
+                                            aria-haspopup="true" 
+                                            aria-expanded="false">
                                         {{translate('Actions')}}
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $plan->id }}">
                                         <a class="dropdown-item" href="{{ route('admin.sip.plan.show', $plan->id) }}">
                                             <i class="tio-visible mr-2"></i>{{translate('View Details')}}
                                         </a>

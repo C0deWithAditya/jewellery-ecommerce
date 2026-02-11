@@ -101,4 +101,152 @@ class Product extends Model
             }]);
         });
     }
+
+    // ==========================================
+    // MULTI-METAL JEWELRY RELATIONSHIPS
+    // ==========================================
+
+    /**
+     * Get all metal components for this product.
+     */
+    public function metals(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\ProductMetal::class)->orderBy('sort_order');
+    }
+
+    /**
+     * Get stone details for this product.
+     */
+    public function stones(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\ProductStone::class);
+    }
+
+    /**
+     * Get certifications for this product.
+     */
+    public function certifications(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(\App\Models\ProductCertification::class);
+    }
+
+    // ==========================================
+    // DYNAMIC PRICING METHODS
+    // ==========================================
+
+    /**
+     * Calculate and get the current price.
+     */
+    public function getCurrentPrice(): float
+    {
+        if ($this->is_price_dynamic && $this->metals()->exists()) {
+            $pricingService = app(\App\Services\ProductPricingService::class);
+            $pricing = $pricingService->calculateProductPrice($this);
+            return $pricing['total_price'];
+        }
+
+        return floatval($this->price);
+    }
+
+    /**
+     * Get full price breakdown.
+     */
+    public function getPriceBreakdown(): array
+    {
+        if (!$this->is_price_dynamic) {
+            return [
+                'base_metal_value' => 0,
+                'making_charges' => floatval($this->making_charges ?? 0),
+                'stone_charges' => floatval($this->stone_charges ?? 0),
+                'other_charges' => floatval($this->other_charges ?? 0),
+                'total_price' => floatval($this->price),
+            ];
+        }
+
+        $pricingService = app(\App\Services\ProductPricingService::class);
+        return $pricingService->calculateProductPrice($this);
+    }
+
+    /**
+     * Update price from current metal rates.
+     */
+    public function recalculatePrice(): self
+    {
+        if ($this->is_price_dynamic) {
+            $pricingService = app(\App\Services\ProductPricingService::class);
+            $pricingService->updateProductPrice($this);
+        }
+
+        return $this->fresh();
+    }
+
+    /**
+     * Get total metal weight in grams.
+     */
+    public function getTotalMetalWeight(): float
+    {
+        return $this->metals()
+            ->where('weight_unit', 'gram')
+            ->sum('weight');
+    }
+
+    /**
+     * Get list of metal types in this product.
+     */
+    public function getMetalTypes(): array
+    {
+        return $this->metals()
+            ->pluck('metal_type')
+            ->unique()
+            ->values()
+            ->toArray();
+    }
+
+    /**
+     * Check if product has multiple metals.
+     */
+    public function hasMultipleMetals(): bool
+    {
+        return $this->metals()->count() > 1;
+    }
+
+    /**
+     * Get display label for metal composition.
+     */
+    public function getMetalCompositionLabel(): string
+    {
+        $metals = $this->metals()->get();
+        
+        if ($metals->isEmpty()) {
+            return ucfirst($this->metal_type ?? 'N/A');
+        }
+
+        return $metals->map(function ($metal) {
+            $label = ucfirst($metal->metal_type);
+            if ($metal->purity) {
+                $label .= ' ' . strtoupper($metal->purity);
+            }
+            $label .= ' (' . $metal->getWeightDisplay() . ')';
+            return $label;
+        })->implode(' + ');
+    }
+
+    /**
+     * Scope for products with dynamic pricing.
+     */
+    public function scopeDynamicPriced($query)
+    {
+        return $query->where('is_price_dynamic', true);
+    }
+
+    /**
+     * Scope for products containing a specific metal type.
+     */
+    public function scopeContainsMetal($query, string $metalType)
+    {
+        return $query->whereHas('metals', function ($q) use ($metalType) {
+            $q->where('metal_type', $metalType);
+        });
+    }
 }
+

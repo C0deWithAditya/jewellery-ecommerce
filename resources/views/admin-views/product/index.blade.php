@@ -97,8 +97,8 @@
                                         <div class="form-group">
                                             <label class="input-label"
                                                    for="exampleFormControlInput1">{{translate('tax')}}</label>
-                                            <input type="number" min="0" value="0" step="0.01" max="100000" name="tax"
-                                                   class="form-control"
+                                            <input type="number" min="0" value="0" step="0.01" max="100000" name="tax" id="product_tax"
+                                                   class="form-control selling-price-input"
                                                    placeholder="{{ translate('Ex : 7') }}" required>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                         <div class="form-group">
                                             <label class="input-label"
                                                    for="exampleFormControlInput1">{{translate('tax')}} {{translate('type')}}</label>
-                                            <select name="tax_type" class="form-control js-select2-custom">
+                                            <select name="tax_type" id="tax_type" class="form-control js-select2-custom selling-price-input">
                                                 <option value="percent">{{translate('percent')}}</option>
                                                 <option value="amount">{{translate('amount')}}</option>
                                             </select>
@@ -117,7 +117,7 @@
                                         <div class="form-group">
                                             <label class="input-label"
                                                    for="exampleFormControlInput1">{{translate('discount')}}</label>
-                                            <input type="number" min="0" max="100000" value="0" step="0.01" name="discount" class="form-control"
+                                            <input type="number" min="0" max="100000" value="0" step="0.01" name="discount" id="product_discount" class="form-control selling-price-input"
                                                    placeholder="{{ translate('Ex : 100') }}" required>
                                         </div>
                                     </div>
@@ -125,12 +125,42 @@
                                         <div class="form-group">
                                             <label class="input-label"
                                                    for="exampleFormControlInput1">{{translate('discount')}} {{translate('type')}}</label>
-                                            <select name="discount_type" class="form-control js-select2-custom">
+                                            <select name="discount_type" id="discount_type" class="form-control js-select2-custom selling-price-input">
                                                 <option value="percent">{{translate('percent')}}</option>
                                                 <option value="amount">{{translate('amount')}}</option>
                                             </select>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Selling Price Preview -->
+                                    <div class="col-12">
+                                        <div class="card bg-light border-0" id="selling_price_preview">
+                                            <div class="card-body py-3">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-6">
+                                                        <h6 class="mb-0"><i class="tio-calculator mr-2"></i>{{translate('Selling Price Preview')}}</h6>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="d-flex justify-content-md-end gap-3">
+                                                            <div class="text-muted">
+                                                                <small>{{translate('Tax')}}: </small>
+                                                                <span id="preview_tax_amount" class="text-success">₹0.00</span>
+                                                            </div>
+                                                            <div class="text-muted">
+                                                                <small>{{translate('Discount')}}: </small>
+                                                                <span id="preview_discount_amount" class="text-danger">₹0.00</span>
+                                                            </div>
+                                                            <div>
+                                                                <strong>{{translate('Final')}}: </strong>
+                                                                <strong id="preview_selling_price" class="text-primary">₹0.00</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="form-group">
                                             <label class="input-label"
@@ -139,6 +169,7 @@
                                                    placeholder="{{ translate('Ex : 100') }}">
                                         </div>
                                     </div>
+
 
                                     <div class="col-lg-4 col-sm-6">
                                         <div class="form-group">
@@ -279,11 +310,74 @@
             });
         }
 
+        // Calculate selling price with tax and discount
+        function calculateSellingPrice() {
+            const priceField = document.querySelector('input[name="price"]');
+            const taxField = document.getElementById('product_tax');
+            const taxTypeField = document.getElementById('tax_type');
+            const discountField = document.getElementById('product_discount');
+            const discountTypeField = document.getElementById('discount_type');
+            
+            if (!priceField || !taxField || !discountField) return;
+            
+            const price = parseFloat(priceField.value) || 0;
+            const tax = parseFloat(taxField.value) || 0;
+            const discount = parseFloat(discountField.value) || 0;
+            const taxType = taxTypeField ? taxTypeField.value : 'percent';
+            const discountType = discountTypeField ? discountTypeField.value : 'percent';
+            
+            // Calculate tax amount
+            let taxAmount = 0;
+            if (taxType === 'percent') {
+                taxAmount = (price * tax) / 100;
+            } else {
+                taxAmount = tax;
+            }
+            
+            // Calculate discount amount
+            let discountAmount = 0;
+            if (discountType === 'percent') {
+                discountAmount = (price * discount) / 100;
+            } else {
+                discountAmount = discount;
+            }
+            
+            // Calculate final selling price
+            const sellingPrice = price + taxAmount - discountAmount;
+            
+            // Update preview
+            const taxPreview = document.getElementById('preview_tax_amount');
+            const discountPreview = document.getElementById('preview_discount_amount');
+            const sellingPreview = document.getElementById('preview_selling_price');
+            
+            if (taxPreview) {
+                taxPreview.textContent = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            if (discountPreview) {
+                discountPreview.textContent = '₹' + discountAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+            if (sellingPreview) {
+                sellingPreview.textContent = '₹' + sellingPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+        }
+
+        // Add event listeners for selling price calculation
+        $(document).ready(function() {
+            // Listen to all relevant input changes
+            $(document).on('input change', 'input[name="price"], #product_tax, #product_discount, #tax_type, #discount_type', function() {
+                calculateSellingPrice();
+            });
+            
+            // Initial calculation
+            setTimeout(calculateSellingPrice, 500);
+        });
+
         $(document).on('ready', function () {
             $('.js-select2-custom').each(function () {
                 var select2 = $.HSCore.components.HSSelect2.init($(this));
             });
         });
+
 
         $('#choice_attributes').on('change', function () {
             $('#customer_choice_options').html(null);
@@ -355,7 +449,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    if (data.errors) {
+                    if (data.errors && data.errors.length > 0) {
                         for (var i = 0; i < data.errors.length; i++) {
                             toastr.error(data.errors[i].message, {
                                 CloseButton: true,
@@ -363,7 +457,7 @@
                             });
                         }
                     } else {
-                        toastr.success('{{ translate("product uploaded successfully!") }}', {
+                        toastr.success('{{ translate("Product uploaded successfully!") }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -371,9 +465,17 @@
                             location.href = '{{route('admin.product.list')}}';
                         }, 2000);
                     }
+                },
+                error: function(xhr, status, error) {
+                    toastr.error('{{ translate("Something went wrong. Please try again.") }}', {
+                        CloseButton: true,
+                        ProgressBar: true
+                    });
+                    console.error('Error:', error);
                 }
             });
         });
+
 
         function update_qty() {
             var total_qty = 0;

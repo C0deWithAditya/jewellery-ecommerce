@@ -141,7 +141,12 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('view/{id}', [ProductController::class, 'view'])->name('view');
             Route::get('get-categories', [ProductController::class, 'getCategories'])->name('get-categories');
             Route::get('remove-image/{id}/{name}', [ProductController::class, 'removeImage'])->name('remove-image');
+            
+            // Multi-metal product pricing
+            Route::post('preview-price', [ProductController::class, 'previewPrice'])->name('preview-price');
+            Route::post('recalculate-price/{id}', [ProductController::class, 'recalculatePrice'])->name('recalculate-price');
         });
+
 
         Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
             Route::get('list/{status}', [OrderController::class, 'list'])->name('list');

@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Observers\MetalRateObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+#[ObservedBy([MetalRateObserver::class])]
 class MetalRate extends Model
 {
     use HasFactory;
+
 
     protected $fillable = [
         'metal_type',
